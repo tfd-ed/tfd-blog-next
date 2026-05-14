@@ -55,35 +55,27 @@
                 </span>
             </div>
 
+            <!-- Share Buttons -->
+            <div class="not-prose mb-8">
+                <SocialShareButtons />
+            </div>
+
             <!-- Description -->
-            <p v-if="article.description" class="text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
-                {{ article.description }}
-            </p>
+            <div v-if="article.description"
+                class="not-prose border-l-4 border-tfd bg-tfd/5 dark:bg-tfd/10 rounded-r-lg px-5 py-4 mb-8">
+                <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed italic">
+                    {{ article.description }}
+                </p>
+            </div>
+
+            <!-- Divider -->
+            <hr v-if="article.description" class="not-prose border-gray-200 dark:border-gray-700 mb-8" />
 
             <!-- Article Content -->
             <div class="article-content">
                 <ContentRenderer :value="article" />
             </div>
         </article>
-
-        <!-- Share Section -->
-        <!-- <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ $t('share_this_article') }}</h3>
-            <div class="flex gap-4">
-                <button @click="shareOnTwitter"
-                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-                    {{ $t('twitter') }}
-                </button>
-                <button @click="shareOnFacebook"
-                    class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors">
-                    {{ $t('facebook') }}
-                </button>
-                <button @click="copyLink"
-                    class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                    {{ $t('copy_link') }}
-                </button>
-            </div>
-        </div> -->
 
         <!-- Navigation to other articles -->
         <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
@@ -137,37 +129,42 @@ const formatDate = (date: string | Date) => {
     })
 }
 
-// Share functions
-const shareOnTwitter = () => {
-    const url = window.location.href
-    const text = article.value?.title || ''
-    window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank')
-}
-
-const shareOnFacebook = () => {
-    const url = window.location.href
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank')
-}
-
-const copyLink = async () => {
-    try {
-        await navigator.clipboard.writeText(window.location.href)
-        alert('Link copied to clipboard!')
-    } catch (err) {
-        console.error('Failed to copy link:', err)
-    }
-}
-
 // SEO Meta tags
-useHead({
-    title: `${article.value?.title} - Teaching For Development`,
-    meta: [
-        { name: 'description', content: article.value?.description || '' },
-        { property: 'og:title', content: article.value?.title || '' },
-        { property: 'og:description', content: article.value?.description || '' },
-        { property: 'og:image', content: article.value?.image || '' }
-    ]
+// useHead({
+//     title: `${article.value?.title} - Teaching For Development`,
+//     meta: [
+//         { name: 'description', content: article.value?.description || '' },
+//         { property: 'og:title', content: article.value?.title || '' },
+//         { property: 'og:description', content: article.value?.description || '' },
+//         { property: 'og:image', content: article.value?.image || '' }
+//     ]
+// })
+
+const pageTitle = computed(() =>
+    article.value?.title ? `${article.value.title} - Teaching For Development` : 'Teaching For Development'
+)
+
+defineOgImage('BlogPost', {
+    title: article.value?.title,
+    author: article.value?.author,
+    date: article.value?.date,
 })
+
+useSeoMeta({
+    title: pageTitle,
+    description: article.value?.description,
+    ogTitle: pageTitle,
+    ogDescription: article.value?.description,
+    ogType: 'article',
+    ogUrl: `https://tfdevs.com${route.path}`,
+    ogSiteName: 'Teaching For Development',
+    twitterCard: 'summary_large_image',
+    twitterTitle: pageTitle,
+    twitterDescription: article.value?.description,
+    articlePublishedTime: article.value?.date ? new Date(article.value.date).toISOString() : undefined,
+    articleAuthor: article.value?.author ? [article.value.author] : undefined,
+})
+
 </script>
 
 <style>

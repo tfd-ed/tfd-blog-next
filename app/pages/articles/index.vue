@@ -226,13 +226,21 @@ onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll)
 })
 
-// SEO Meta tags
-useHead({
+defineOgImage('BlogPost', {
+    title: 'Articles',
+    author: 'Teaching For Development',
+})
+
+useSeoMeta({
     title: 'Articles - Teaching For Development',
-    meta: [
-        { name: 'description', content: 'Explore our latest articles on technology, development, AI, and innovation.' },
-        { property: 'og:title', content: 'Articles - TFD' },
-        { property: 'og:description', content: 'Latest tech articles and tutorials from Teaching For Development' }
-    ]
+    description: 'Explore our latest articles on technology, development, AI, and innovation.',
+    ogTitle: 'Articles - Teaching For Development',
+    ogDescription: 'Explore our latest articles on technology, development, AI, and innovation.',
+    ogType: 'website',
+    ogUrl: 'https://tfdevs.com/articles',
+    ogSiteName: 'Teaching For Development',
+    twitterCard: 'summary_large_image',
+    twitterTitle: 'Articles - Teaching For Development',
+    twitterDescription: 'Explore our latest articles on technology, development, AI, and innovation.',
 })
 </script>

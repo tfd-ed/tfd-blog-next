@@ -41,7 +41,7 @@
 
                     <div class="flex items-center gap-x-3">
                         <DarkModeToggle />
-                        <div class="flex items-center space-x-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+                        <!-- <div class="flex items-center space-x-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
                             <button @click="setLocale('en')" :class="[
                                 'flex items-center space-x-1 px-2 py-1 rounded-md text-xs sm:text-sm font-medium transition-colors',
                                 locale === 'en'
@@ -62,7 +62,8 @@
                                     :provider="imageProvider" />
                                 <span class="hidden sm:inline">{{ $t('khmer') }}</span>
                             </button>
-                        </div>
+                        </div> -->
+                        <language-switcher />
                     </div>
                 </div>
             </div>
@@ -79,7 +80,7 @@
                         <DarkModeToggle />
                         <div class="flex items-center justify-between">
 
-                            <div class="flex items-center space-x-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+                            <!-- <div class="flex items-center space-x-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
                                 <button @click="setLocale('en')" :class="[
                                     'flex items-center space-x-1 px-2 py-1 rounded-md text-xs sm:text-sm font-medium transition-colors',
                                     locale === 'en'
@@ -100,7 +101,8 @@
                                         :provider="imageProvider" />
                                     <span class="hidden sm:inline">{{ $t('khmer') }}</span>
                                 </button>
-                            </div>
+                            </div> -->
+                            <language-switcher />
                         </div>
                     </div>
                 </div>

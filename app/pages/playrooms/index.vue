@@ -150,13 +150,21 @@ const aiModels = ref([
     }
 ])
 
-// SEO Meta tags
-useHead({
-    title: 'AI Playrooms - Teaching For Development',
-    meta: [
-        { name: 'description', content: 'Explore our AI playrooms featuring object detection, document Q&A, text summarization, and more interactive AI models.' },
-        { property: 'og:title', content: 'AI Playrooms - TFD' },
-        { property: 'og:description', content: 'Interactive AI models playground for learning and experimentation' }
-    ]
+defineOgImage('BlogPost', {
+    title: 'AI & ML Playroom',
+    author: 'Teaching For Development',
+})
+
+useSeoMeta({
+    title: 'AI & ML Playroom - Teaching For Development',
+    description: 'Explore interactive AI and machine learning demos. Try object detection, document Q&A, text summarization, and more.',
+    ogTitle: 'AI & ML Playroom - Teaching For Development',
+    ogDescription: 'Explore interactive AI and machine learning demos. Try object detection, document Q&A, text summarization, and more.',
+    ogType: 'website',
+    ogUrl: 'https://tfdevs.com/playrooms',
+    ogSiteName: 'Teaching For Development',
+    twitterCard: 'summary_large_image',
+    twitterTitle: 'AI & ML Playroom - Teaching For Development',
+    twitterDescription: 'Explore interactive AI and machine learning demos. Try object detection, document Q&A, text summarization, and more.',
 })
 </script>

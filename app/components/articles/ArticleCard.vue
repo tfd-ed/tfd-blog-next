@@ -11,9 +11,8 @@
             <div
                 class="px-6 pb-6 pt-6 w-full transition-opacity duration-300 group-hover:absolute group-hover:opacity-0">
                 <!-- Article icon or image -->
-                <div v-if="image" class="mb-4">
-                    <NuxtImg :src="image" :alt="title" class="w-full h-48 sm:h-56 rounded-lg object-cover"
-                        :provider="'ipx'" />
+                <div v-if="image" class="-mx-6 -mt-6 mb-4">
+                    <NuxtImg :src="image" :alt="title" class="w-full h-48 sm:h-56 object-cover" :provider="'ipx'" />
                 </div>
                 <div v-else class="mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 sm:w-16 sm:h-16 text-tfd" fill="none"
@@ -27,6 +26,14 @@
                 <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white line-clamp-2">
                     {{ title }}
                 </h2>
+
+                <!-- Tags -->
+                <div v-if="tags && tags.length > 0" class="mt-3 flex flex-wrap gap-2">
+                    <span v-for="tag in tags.slice(0, 3)" :key="tag"
+                        class="px-2 py-1 text-xs font-medium bg-tfd/10 text-tfd dark:bg-tfd/20 rounded-full">
+                        {{ tag }}
+                    </span>
+                </div>
 
                 <!-- Date and read time -->
                 <div class="mt-3 flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
@@ -75,7 +82,7 @@
                 <div class="mt-6">
                     <p
                         class="text-base sm:text-lg font-bold text-gray-900 dark:text-white hover:text-tfd dark:hover:text-tfd transition-colors">
-                        Read more →
+                        {{ $t('read_more') }} →
                     </p>
                 </div>
             </div>

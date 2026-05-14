@@ -109,4 +109,22 @@ const socialLinks = {
     github: 'https://github.com/tfd-ed'
 }
 
+defineOgImage('BlogPost', {
+    title: 'Teaching For Development',
+    author: 'Chau Dara',
+})
+
+useSeoMeta({
+    title: 'Teaching For Development',
+    description: 'Bringing technology education to everyone in Cambodia. Learn AI, software development, and more.',
+    ogTitle: 'Teaching For Development',
+    ogDescription: 'Bringing technology education to everyone in Cambodia. Learn AI, software development, and more.',
+    ogType: 'website',
+    ogUrl: 'https://tfdevs.com',
+    ogSiteName: 'Teaching For Development',
+    twitterCard: 'summary_large_image',
+    twitterTitle: 'Teaching For Development',
+    twitterDescription: 'Bringing technology education to everyone in Cambodia. Learn AI, software development, and more.',
+})
+
 </script>

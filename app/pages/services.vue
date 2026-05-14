@@ -21,10 +21,26 @@ const { data: page } = await useAsyncData(
     }
 )
 
-// SEO Meta
+const pageTitle = computed(() =>
+    page.value?.title ? `${page.value.title} - Teaching For Development` : 'Services - Teaching For Development'
+)
+
+defineOgImage('BlogPost', {
+    title: page.value?.title || 'Services',
+    author: 'Teaching For Development',
+})
+
 useSeoMeta({
-    title: page.value?.title || 'Software Consulting Services - Technology For Development',
-    description: page.value?.description || 'Professional software consulting and development services'
+    title: pageTitle,
+    description: page.value?.description,
+    ogTitle: pageTitle,
+    ogDescription: page.value?.description,
+    ogType: 'website',
+    ogUrl: 'https://tfdevs.com/services',
+    ogSiteName: 'Teaching For Development',
+    twitterCard: 'summary_large_image',
+    twitterTitle: pageTitle,
+    twitterDescription: page.value?.description,
 })
 
 // Form state

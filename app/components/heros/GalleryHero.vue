@@ -31,15 +31,35 @@
                     transparent      100%
                 );
             ">
-            <!-- Tile grid — doubled so translateX(-50%) loops seamlessly -->
-            <div class="absolute top-0 left-0 flex flex-wrap gap-3 p-4 gallery-drift" :style="{ width: '280vw' }">
-                <div v-for="(image, index) in tiledImages" :key="index"
-                    class="shrink-0 rounded-2xl overflow-hidden shadow-xl" :style="{
-                        transform: `rotate(${tileConfigs[index % tileConfigs.length].rotation}deg)`,
-                        width: tileConfigs[index % tileConfigs.length].w,
-                        height: tileConfigs[index % tileConfigs.length].h,
-                    }">
-                    <img :src="image.src" :alt="image.alt" class="w-full h-full object-cover" loading="lazy" />
+            <!-- 2-row tile grid — each row loops seamlessly on its own width -->
+            <div class="absolute inset-0 flex flex-col gap-4 justify-center py-6">
+                <!-- Row 1 -->
+                <div class="flex gap-4 gallery-drift" style="width: max-content">
+                    <div v-for="(tile, index) in row1Tiles" :key="`r1-${index}`"
+                        class="shrink-0 rounded-2xl overflow-hidden shadow-xl bg-gray-300 dark:bg-gray-700" :style="{
+                            transform: `rotate(${tile.config.rotation}deg)`,
+                            width: tile.config.w,
+                            height: tile.config.h,
+                        }">
+                        <img :src="tile.image.src" :alt="tile.image.alt"
+                            class="w-full h-full object-cover transition-opacity duration-500"
+                            :class="loadedImages.has(tile.image.src) ? 'opacity-100' : 'opacity-0'" loading="eager"
+                            fetchpriority="high" @load="onImageLoad(tile.image.src)" />
+                    </div>
+                </div>
+                <!-- Row 2 -->
+                <div class="flex gap-4 gallery-drift" style="width: max-content">
+                    <div v-for="(tile, index) in row2Tiles" :key="`r2-${index}`"
+                        class="shrink-0 rounded-2xl overflow-hidden shadow-xl bg-gray-300 dark:bg-gray-700" :style="{
+                            transform: `rotate(${tile.config.rotation}deg)`,
+                            width: tile.config.w,
+                            height: tile.config.h,
+                        }">
+                        <img :src="tile.image.src" :alt="tile.image.alt"
+                            class="w-full h-full object-cover transition-opacity duration-500"
+                            :class="loadedImages.has(tile.image.src) ? 'opacity-100' : 'opacity-0'" loading="eager"
+                            fetchpriority="high" @load="onImageLoad(tile.image.src)" />
+                    </div>
                 </div>
             </div>
 
@@ -107,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 interface Image {
     src: string
@@ -123,19 +143,25 @@ const props = defineProps({
     showCTA: { type: Boolean, default: true }
 })
 
+// Track which unique srcs have finished loading so tiles fade in cleanly
+const loadedImages = ref(new Set<string>())
+function onImageLoad(src: string) {
+    loadedImages.value = new Set(loadedImages.value).add(src)
+}
+
 /**
  * Tile configuration: predefined size + rotation combos.
  * Kept to ~8 entries so the pattern isn't obviously repetitive.
  */
 const tileConfigs = [
-    { w: '160px', h: '120px', rotation: -3 },
-    { w: '130px', h: '160px', rotation: 2 },
-    { w: '190px', h: '130px', rotation: -1.5 },
-    { w: '145px', h: '145px', rotation: 3.5 },
-    { w: '170px', h: '110px', rotation: -4 },
-    { w: '120px', h: '155px', rotation: 1.5 },
-    { w: '200px', h: '140px', rotation: -2.5 },
-    { w: '150px', h: '175px', rotation: 4 },
+    { w: '250px', h: '200px', rotation: -3 },
+    { w: '270px', h: '185px', rotation: 2 },
+    { w: '290px', h: '215px', rotation: -1.5 },
+    { w: '235px', h: '205px', rotation: 3.5 },
+    { w: '260px', h: '190px', rotation: -4 },
+    { w: '240px', h: '220px', rotation: 1.5 },
+    { w: '280px', h: '200px', rotation: -2.5 },
+    { w: '255px', h: '210px', rotation: 4 },
 ]
 
 /**
@@ -151,22 +177,60 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 /**
- * Repeat the shuffled image array until we have enough tiles.
- * The first half and second half are independently shuffled so the
- * seamless-loop seam doesn't create an obvious repeated block.
+ * Spread-fill: place `count` tiles by drawing from the image pool such
+ * that the same image never appears within `window` positions of itself.
+ * Each tile also gets an independently randomised config so the same
+ * photo never looks identical when it repeats.
  */
-const MIN_TILES = 112
-const tiledImages = computed<Image[]>(() => {
-    if (!props.images.length) return []
-    const half = MIN_TILES / 2
-    const fillHalf = (target: number): Image[] => {
-        const result: Image[] = []
-        while (result.length < target) {
-            result.push(...shuffle(props.images))
+function spreadFill(images: Image[], count: number): { image: Image; config: typeof tileConfigs[number] }[] {
+    const WINDOW = Math.min(Math.floor(images.length * 0.6), 12)
+    const configs = shuffle([...tileConfigs, ...tileConfigs]) // double pool for more variety
+    const result: { image: Image; config: typeof tileConfigs[number] }[] = []
+    const recent: string[] = []
+
+    // build a large shuffled supply to draw from
+    let supply: Image[] = []
+    while (supply.length < count * 2) supply.push(...shuffle(images))
+
+    let supplyIdx = 0
+    while (result.length < count) {
+        // scan supply for an image not in the recent window
+        let picked: Image | null = null
+        for (let attempt = 0; attempt < supply.length - supplyIdx; attempt++) {
+            const candidate = supply[supplyIdx + attempt]
+            if (!recent.includes(candidate.src)) {
+                picked = candidate
+                supply.splice(supplyIdx + attempt, 1) // remove so it isn't reused immediately
+                break
+            }
         }
-        return result.slice(0, target)
+        if (!picked) {
+            // fallback: just take next (shouldn't happen with enough supply)
+            picked = supply[supplyIdx++]
+        }
+
+        result.push({
+            image: picked,
+            config: configs[result.length % configs.length]
+        })
+
+        recent.push(picked.src)
+        if (recent.length > WINDOW) recent.shift()
     }
-    return [...fillHalf(half), ...fillHalf(half)]
+    return result
+}
+
+// 40 unique tiles per half-row; duplicate each half so translateX(-50%) loops perfectly
+const HALF = 40
+const row1Tiles = computed(() => {
+    if (!props.images.length) return []
+    const half = spreadFill(props.images, HALF)
+    return [...half, ...half]
+})
+const row2Tiles = computed(() => {
+    if (!props.images.length) return []
+    const half = spreadFill(props.images, HALF)
+    return [...half, ...half]
 })
 </script>
 
@@ -182,7 +246,7 @@ const tiledImages = computed<Image[]>(() => {
 }
 
 .gallery-drift {
-    animation: gallery-drift 160s linear infinite;
+    animation: gallery-drift 480s linear infinite;
     will-change: transform;
 }
 </style>

@@ -15,15 +15,33 @@
     "@nuxt/image": "1.11.0",
     "@nuxt/ui": "^4.6.1",
     "@nuxtjs/i18n": "^10.1.1",
+    "@nuxtjs/sitemap": "8.0.15",
+    "@takumi-rs/core": "^1.1.2",
+    "@unhead/vue": "^2.0.5 || ^3.0.0",
     "better-sqlite3": "^12.4.1",
     "motion-v": "^1.7.3",
     "nuxt": "^4.4.2",
+    "nuxt-og-image": "6.5.0",
     "onnxruntime-web": "^1.23.0",
     "rehype-katex": "^7.0.1",
     "rehype-mathjax": "^7.1.0",
     "remark-math": "^6.0.0",
+    "unstorage": "^1.15.0",
     "vue": "^3.5.22",
+    "sharp": "^0.34.5",
     "vue-router": "^4.5.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3",
+      "sqlite3"
+    ]
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@stefanobartoletti/nuxt-social-share": "^2.3.1",
+    "@takumi-rs/core": "^0.73.1",
+    "@takumi-rs/wasm": "^0.73.1"
   },
   "packageManager": "pnpm@9.3.0+sha512.ee7b93e0c2bd11409c6424f92b866f31d3ea1bef5fbe47d3c7500cdc3c9668833d2e55681ad66df5b640c61fa9dc25d546efa54d76d7f8bf54b13614ac293631"
 }

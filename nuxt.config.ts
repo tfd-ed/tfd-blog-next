@@ -1,13 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const isDev = process.env.NODE_ENV === 'development'
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   modules: [
     '@nuxt/ui',
     '@nuxtjs/i18n',
+    '@stefanobartoletti/nuxt-social-share',
     '@nuxt/image',
     'motion-v/nuxt',
     '@nuxt/content',
-    '@nuxt/fonts'
+    '@nuxt/fonts',
+    'nuxt-og-image',
+    '@nuxtjs/sitemap'
   ],
   content: {
     build: {
@@ -30,13 +35,20 @@ export default defineNuxtConfig({
     }
   },
   i18n: {
+    baseUrl: 'https://tfdevs.com',
     strategy: 'prefix_except_default',
     defaultLocale: 'km',
     langDir: 'locales/',
     locales: [
       { code: 'en', name: 'English', file: 'en.json' },
       { code: 'km', name: 'Khmer', file: 'km.json' }
-    ]
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      alwaysRedirect: true,
+      fallbackLocale: 'km'
+    }
   },
   css: ['~/assets/css/main.css'],
   // googleFonts: {
@@ -47,6 +59,14 @@ export default defineNuxtConfig({
   //     'Playfair Display': true
   //   }
   // },
+  socialShare: {
+    baseUrl: 'https://tfdevs.com' // required!
+    // other optional module options
+  },
+  site: {
+    url: 'https://tfdevs.com',
+    name: 'TFDevs',
+  },
   fonts: {
     families: [
       {
@@ -68,5 +88,74 @@ export default defineNuxtConfig({
   //     collections: ['lucide']
   //   }
   // },
+  app: {
+    pageTransition: { name: 'page' }
+  },
+  ogImage: {
+    zeroRuntime: true
+  },
+  vite: {
+    optimizeDeps: {
+      include: [
+        'vue-i18n',
+        '@intlify/shared',
+        '@intlify/message-compiler',
+        '@intlify/core-base',
+        '@intlify/core',
+        '@intlify/utils/h3',
+        'ufo',
+        '@vue/devtools-core',
+        '@vue/devtools-kit',
+        '@vueuse/core',
+      ]
+    }
+  },
+  nitro: {
+    prerender: {
+      autoSubfolderIndex: false,
+      crawlLinks: true,
+      routes: [
+        '/',
+        '/en',
+        '/about-us',
+        '/services',
+        '/articles',
+        '/courses',
+        '/projects',
+        '/playrooms',
+      ],
+    },
+    routeRules: {
+      // Static content pages - ISR in prod
+      '/': isDev ? {} : { isr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=86400' } },
+      '/en': isDev ? {} : { isr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=86400' } },
+      '/about-us': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/en/about-us': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/services': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/en/services': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/articles': isDev ? {} : { isr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=86400' } },
+      '/en/articles': isDev ? {} : { isr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=86400' } },
+      '/articles/**': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/en/articles/**': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/courses': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/en/courses': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/projects': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/en/projects': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      // Playroom index - cacheable; individual tools are client-side interactive
+      '/playrooms': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/en/playrooms': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
+      '/playrooms/object-detection': { ssr: false },
+      '/en/playrooms/object-detection': { ssr: false },
+      '/playrooms/document-qa': { ssr: false },
+      '/en/playrooms/document-qa': { ssr: false },
+      '/playrooms/summarization': { ssr: false },
+      '/en/playrooms/summarization': { ssr: false },
+      // OG images - long cache (they rarely change)
+      '/__og-image__/**': { headers: { 'cache-control': 'public, max-age=86400, stale-while-revalidate=604800' } },
+      // Static assets - very long cache (fingerprinted by Vite)
+      '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    },
+    compressPublicAssets: true,
+  },
   devtools: { enabled: true }
 })
