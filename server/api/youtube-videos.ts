@@ -37,7 +37,7 @@ export default defineEventHandler(async (): Promise<YoutubeVideo[]> => {
     const channelId = 'UCJHZ__wUxS9lgTZHMxpMJcQ'
 
     if (!apiKey) {
-        console.warn('[youtube-videos] YOUTUBE_API_KEY is not set')
+        console.log('[youtube-videos] YOUTUBE_API_KEY is not set')
         return []
     }
 
