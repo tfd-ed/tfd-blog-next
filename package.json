@@ -22,13 +22,12 @@
     "motion-v": "^1.7.3",
     "nuxt": "^4.4.2",
     "nuxt-og-image": "6.5.0",
-    "onnxruntime-web": "^1.23.0",
     "rehype-katex": "^7.0.1",
     "rehype-mathjax": "^7.1.0",
     "remark-math": "^6.0.0",
+    "sharp": "^0.34.5",
     "unstorage": "^1.15.0",
     "vue": "^3.5.22",
-    "sharp": "^0.34.5",
     "vue-router": "^4.5.1"
   },
   "pnpm": {
