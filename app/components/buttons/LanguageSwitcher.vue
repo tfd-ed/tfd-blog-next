@@ -13,7 +13,7 @@ const currentLocaleName = computed(() => {
 
 <template>
     <UButton v-if="otherLocale" :to="switchLocalePath(otherLocale.code)" color="neutral" variant="ghost" size="sm"
-        class="rounded-full" :aria-label="`Switch to ${t(otherLocale.name)}`">
+        class="rounded-full" :aria-label="`Switch to ${t(otherLocale.name.toLowerCase())}`">
         <template #leading>
             <UIcon name="i-lucide-languages" class="size-4" />
         </template>
