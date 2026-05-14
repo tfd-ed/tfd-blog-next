@@ -30,7 +30,7 @@
                 class="inline-flex items-center justify-center px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-200 min-w-40">
                 {{ $t('watch_video') }}
             </a>
-            <NuxtLink to="/about"
+            <NuxtLink to="/about-us"
                 class="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold rounded-lg border border-gray-300 dark:border-gray-600 transition-all duration-200 min-w-40">
                 {{ $t('about_us') }}
             </NuxtLink>
