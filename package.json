@@ -35,7 +35,10 @@
     "onlyBuiltDependencies": [
       "better-sqlite3",
       "sqlite3"
-    ]
+    ],
+    "overrides": {
+      "motion-dom": "12.38.0"
+    }
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
