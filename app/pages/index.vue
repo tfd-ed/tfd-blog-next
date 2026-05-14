@@ -4,6 +4,9 @@
         :author="$t('heros.chau_dara')" :authorTitle="$t('heros.founder')" :showCTA="true" :images="images"
         :subscriber-count="44" channel-link="https://www.youtube.com/@tfdevs" />
 
+    <!-- Latest Articles + Videos -->
+    <LatestFeed :videos="latestVideos" channel-link="https://www.youtube.com/@tfdevs" />
+
     <!-- Connect With Us Component -->
     <div class="container mx-auto px-4 py-8">
         <ConnectWithUs :socialLinks="socialLinks" />
@@ -17,6 +20,10 @@
     <ReachUs /> -->
 </template>
 <script setup lang="ts">
+const { data: latestVideos } = await useFetch('/api/youtube-videos', {
+    default: () => []
+})
+
 const images = [
     {
         src: '/images/heros/cadt-idg.JPG',
