@@ -100,8 +100,10 @@ const { locale } = useI18n()
 const slug = route.params.slug as string
 
 // Fetch the article
+// Key uses route.path (stable across SSR and client hydration) to prevent
+// cache-key mismatches caused by detectBrowserLanguage changing locale before hydration.
 const { data: article } = await useAsyncData(
-    `article-${slug}-${locale.value}`,
+    `article-${route.path}`,
     async () => {
         const collection = ('content_' + locale.value) as keyof Collections
         return await queryCollection(collection).path(`/articles/${slug}`).first()

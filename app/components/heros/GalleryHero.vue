@@ -74,13 +74,37 @@
 
         <!-- ── Hero Text ─────────────────────────────────────────── -->
         <div class="relative z-10 w-full container mx-auto px-6 text-center space-y-5">
-            <!-- Quote icon -->
-            <div class="flex justify-center">
-                <div class="w-11 h-11 flex items-center justify-center bg-white/15 backdrop-blur-sm rounded-xl">
-                    <svg class="w-5 h-5 text-white/90" fill="currentColor" viewBox="0 0 24 24">
+            <!-- YouTube Stats + Stacked Buttons (above title) -->
+            <div v-if="showCTA" ref="ytWidget" class="flex items-center justify-center gap-3 flex-wrap">
+                <!-- YouTube icon + subscriber count -->
+                <div
+                    class="flex flex-col items-center justify-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-2.5 border border-white/15">
+                    <svg class="w-14 h-9 shrink-0" viewBox="0 0 159 110" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
-                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                            d="M154 17.5c-1.82-6.73-7.07-12-13.8-13.8C128.4 0 79.5 0 79.5 0S30.6 0 18.8 3.7C12.07 5.5 6.82 10.77 5 17.5 1.5 29.4 1.5 55 1.5 55s0 25.6 3.5 37.5c1.82 6.73 7.07 12 13.8 13.8 11.8 3.7 60.7 3.7 60.7 3.7s48.9 0 60.7-3.7c6.73-1.8 11.98-7.07 13.8-13.8 3.5-11.9 3.5-37.5 3.5-37.5s0-25.6-3.5-37.5z"
+                            fill="#FF0000" />
+                        <path d="M64 78.77V31.23L104.5 55 64 78.77z" fill="#FFF" />
                     </svg>
+                    <div class="text-center leading-none">
+                        <span class="text-white font-bold text-lg [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]">{{
+                            animatedCount }}K</span>
+                        <div class="text-white/60 text-xs mt-0.5">{{ $t('number_subscribers') }}</div>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="hidden sm:block w-px h-12 bg-white/25"></div>
+
+                <!-- Stacked buttons -->
+                <div class="flex flex-col gap-1.5">
+                    <a :href="channelLink" target="_blank" rel="noopener noreferrer"
+                        class="h-9 px-5 flex items-center justify-center bg-red-600 hover:bg-red-700 text-white font-medium rounded-xl transition-all duration-300 text-sm shadow-lg hover:-translate-y-0.5">
+                        {{ $t('watch_video') }}
+                    </a>
+                    <NuxtLink to="/about-us"
+                        class="h-9 px-5 flex items-center justify-center bg-white/15 hover:bg-white/25 text-white font-medium rounded-xl transition-all duration-300 border border-white/25 hover:border-white/50 backdrop-blur-sm text-sm hover:-translate-y-0.5">
+                        {{ $t('about_us') }}
+                    </NuxtLink>
                 </div>
             </div>
 
@@ -111,23 +135,14 @@
                     authorTitle }}</p>
             </div>
 
-            <!-- CTA Buttons -->
-            <div v-if="showCTA" class="flex flex-wrap gap-3 pt-2 justify-center">
-                <NuxtLink to="/articles"
-                    class="px-6 py-3 bg-tfd hover:bg-tfd/85 text-white font-medium rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 backdrop-blur-sm">
-                    {{ $t('read_articles') }}
-                </NuxtLink>
-                <NuxtLink to="/about-us"
-                    class="px-6 py-3 bg-white/15 hover:bg-white/25 text-white font-medium rounded-xl transition-all duration-300 border border-white/25 hover:border-white/50 backdrop-blur-sm hover:-translate-y-0.5">
-                    {{ $t('about_us') }}
-                </NuxtLink>
-            </div>
+
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
+import { useIntersectionObserver } from '@vueuse/core'
 
 interface Image {
     src: string
@@ -140,7 +155,9 @@ const props = defineProps({
     author: { type: String, default: '' },
     authorTitle: { type: String, default: '' },
     images: { type: Array as () => Image[], default: () => [] },
-    showCTA: { type: Boolean, default: true }
+    showCTA: { type: Boolean, default: true },
+    subscriberCount: { type: Number, default: 44 },
+    channelLink: { type: String, default: 'https://www.youtube.com/@tfdevs' },
 })
 
 // Track which unique srcs have finished loading so tiles fade in cleanly
@@ -148,6 +165,40 @@ const loadedImages = ref(new Set<string>())
 function onImageLoad(src: string) {
     loadedImages.value = new Set(loadedImages.value).add(src)
 }
+
+// Animated subscriber count
+const ytWidget = ref<HTMLElement | null>(null)
+const animatedCount = ref(0)
+const hasAnimated = ref(false)
+
+function animateCount(target: number) {
+    const duration = 2000
+    const start = performance.now()
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3)
+    const tick = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1)
+        animatedCount.value = Math.round(target * easeOut(progress))
+        if (progress < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+}
+
+useIntersectionObserver(ytWidget, ([entry]) => {
+    if (entry?.isIntersecting && !hasAnimated.value) {
+        hasAnimated.value = true
+        animateCount(props.subscriberCount)
+    }
+}, { threshold: 0.3 })
+
+onMounted(() => {
+    if (ytWidget.value) {
+        const rect = ytWidget.value.getBoundingClientRect()
+        if (rect.top < window.innerHeight && !hasAnimated.value) {
+            hasAnimated.value = true
+            animateCount(props.subscriberCount)
+        }
+    }
+})
 
 /**
  * Tile configuration: predefined size + rotation combos.

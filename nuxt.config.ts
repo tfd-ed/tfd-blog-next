@@ -65,7 +65,7 @@ export default defineNuxtConfig({
   },
   site: {
     url: 'https://tfdevs.com',
-    name: 'TFDevs',
+    name: 'TFDevs'
   },
   fonts: {
     families: [

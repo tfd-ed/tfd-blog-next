@@ -1,12 +1,8 @@
 <template>
     <!-- <IntroValue /> -->
     <GalleryHero :title="$t('heros.bring_tech_to_everyone')" :description="$t('heros.success_definition')"
-        :author="$t('heros.chau_dara')" :authorTitle="$t('heros.founder')" :showCTA="true" :images="images" />
-
-    <!-- YouTube Component -->
-    <div class="container mx-auto px-4 py-8">
-        <YouTube channel-url="@tfdevs" :subscriber-count="44" channel-link="https://www.youtube.com/@tfdevs" />
-    </div>
+        :author="$t('heros.chau_dara')" :authorTitle="$t('heros.founder')" :showCTA="true" :images="images"
+        :subscriber-count="44" channel-link="https://www.youtube.com/@tfdevs" />
 
     <!-- Connect With Us Component -->
     <div class="container mx-auto px-4 py-8">
