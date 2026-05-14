@@ -41,7 +41,7 @@
                             width: tile.config.w,
                             height: tile.config.h,
                         }">
-                        <img :src="tile.image.src" :alt="tile.image.alt"
+                        <NuxtImg provider="cloudflare" :src="tile.image.src" :alt="tile.image.alt"
                             class="w-full h-full object-cover transition-opacity duration-500"
                             :class="loadedImages.has(tile.image.src) ? 'opacity-100' : 'opacity-0'" loading="eager"
                             fetchpriority="high" @load="onImageLoad(tile.image.src)" />

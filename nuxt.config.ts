@@ -94,6 +94,11 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page' }
   },
+  image: {
+    cloudflare: {
+      baseURL: 'https://tfdevs.com'
+    }
+  },
   ogImage: {
     zeroRuntime: true
   },

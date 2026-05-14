@@ -13,8 +13,8 @@
         <article class="prose prose-lg dark:prose-invert max-w-none">
             <!-- Featured Image -->
             <div v-if="article.image" class="mb-8 -mx-4 sm:mx-0">
-                <NuxtImg :src="article.image" :alt="article.title"
-                    class="w-full h-64 sm:h-96 object-cover rounded-lg shadow-lg" :provider="'ipx'" />
+                <NuxtImg :src="article.image" :alt="article.title" provider="cloudflare"
+                    class="w-full h-64 sm:h-96 object-cover rounded-lg shadow-lg" />
             </div>
 
             <!-- Title -->

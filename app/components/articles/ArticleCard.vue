@@ -12,7 +12,7 @@
                 class="px-6 pb-6 pt-6 w-full transition-opacity duration-300 group-hover:absolute group-hover:opacity-0">
                 <!-- Article icon or image -->
                 <div v-if="image" class="-mx-6 -mt-6 mb-4">
-                    <NuxtImg :src="image" :alt="title" class="w-full h-48 sm:h-56 object-cover" :provider="'ipx'" />
+                    <NuxtImg provider="cloudflare" :src="image" :alt="title" class="w-full h-48 sm:h-56 object-cover" />
                 </div>
                 <div v-else class="mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 sm:w-16 sm:h-16 text-tfd" fill="none"
