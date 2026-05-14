@@ -1,7 +1,6 @@
 {
   "compatibility_date": "2025-07-15",
   "compatibility_flags": ["nodejs_compat"],
-  "secrets": ["YOUTUBE_API_KEY"],
   "observability": {
     "enabled": false,
     "head_sampling_rate": 1,
