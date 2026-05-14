@@ -3,6 +3,11 @@ const isDev = process.env.NODE_ENV === 'development'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
+  runtimeConfig: {
+    // Server-only — reads YOUTUBE_API_KEY from .env in dev,
+    // and from Cloudflare Pages env vars (plain text) in prod
+    youtubeApiKey: process.env.YOUTUBE_API_KEY ?? '',
+  },
   modules: [
     '@nuxt/ui',
     '@nuxtjs/i18n',

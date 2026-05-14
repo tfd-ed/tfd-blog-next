@@ -28,8 +28,12 @@ interface VideoDetailsRes {
     }[]
 }
 
+import { useRuntimeConfig } from '#imports'
+
 export default defineEventHandler(async (): Promise<YoutubeVideo[]> => {
-    const apiKey = process.env.YOUTUBE_API_KEY
+    // Dev: reads YOUTUBE_API_KEY from .env via runtimeConfig
+    // Prod: reads YOUTUBE_API_KEY from Cloudflare Pages environment variables
+    const { youtubeApiKey: apiKey } = useRuntimeConfig()
     const channelId = 'UCJHZ__wUxS9lgTZHMxpMJcQ'
 
     if (!apiKey) {
