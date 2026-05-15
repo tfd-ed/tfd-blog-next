@@ -26,9 +26,7 @@
     "rehype-mathjax": "^7.1.0",
     "remark-math": "^6.0.0",
     "sharp": "^0.34.5",
-    "unstorage": "^1.17.5",
-    "vue": "^3.5.34",
-    "vue-router": "^4.6.4"
+    "unstorage": "^1.17.5"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -40,6 +38,7 @@
     }
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.107",
     "@resvg/resvg-js": "^2.6.2",
     "@stefanobartoletti/nuxt-social-share": "^2.3.1",
     "@takumi-rs/core": "^0.73.1",

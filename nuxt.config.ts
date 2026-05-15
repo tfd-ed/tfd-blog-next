@@ -163,6 +163,11 @@ export default defineNuxtConfig({
       '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     },
     compressPublicAssets: true,
+    devStorage: {
+      // Use in-memory storage in dev to avoid EISDIR conflict where
+      // nuxt/payload/ directory and nuxt/payload file path collide
+      nuxt: { driver: 'memory' }
+    }
   },
   devtools: { enabled: true }
 })
