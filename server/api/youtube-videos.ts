@@ -34,6 +34,7 @@ export default defineEventHandler(async (event): Promise<YoutubeVideo[]> => {
     // useRuntimeConfig(event) reads from runtimeConfig in nuxt.config
     // which resolves process.env.YOUTUBE_API_KEY — populated by CF Workers
     // via nodejs_compat when the secret is set in Cloudflare dashboard
+    console.log('[youtube-videos] Handling request, reading API key from config...')
     const config = useRuntimeConfig(event)
     const apiKey: string = config.youtubeApiKey || process.env.YOUTUBE_API_KEY || ''
     const channelId = 'UCJHZ__wUxS9lgTZHMxpMJcQ'
