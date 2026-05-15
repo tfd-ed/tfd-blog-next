@@ -29,8 +29,8 @@ COPY --from=deps /app/node_modules ./node_modules
 # Copy application files
 COPY . .
 
-# Build the application
-RUN pnpm build
+# Build the application (increase heap for memory-intensive Nuxt build)
+RUN NODE_OPTIONS=--max-old-space-size=4096 pnpm build
 
 # Stage 3: Runner
 FROM node:20-alpine AS runner
