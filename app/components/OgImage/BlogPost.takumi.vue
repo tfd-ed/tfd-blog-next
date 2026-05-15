@@ -7,49 +7,49 @@ defineProps({
 </script>
 
 <template>
-  <div class="w-full h-full flex flex-col p-[60px] justify-between"
-    style="font-family: 'Google Sans', sans-serif; color: white; background: #0b1120;">
+  <div
+    style="font-family: 'Google Sans', sans-serif; color: #111111; background: #ecf0f1; width: 100%; height: 100%; display: flex; flex-direction: column; padding: 60px; justify-content: space-between; position: relative; overflow: hidden;">
 
     <!-- Top accent bar -->
-    <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: #dc2626;" />
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 7px; background: #e74c3c;" />
 
     <!-- Header -->
-    <div class="flex items-center justify-between">
-      <div class="flex flex-col gap-1">
-        <div class="text-[26px] font-bold" style="color: #dc2626; font-family: 'Google Sans', sans-serif;">
-          Teaching For Development
+    <div style="display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1;">
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <div style="font-size: 27px; font-weight: 700; color: #e74c3c; font-family: 'Google Sans', sans-serif;">
+          TFDevs
         </div>
-        <div class="text-[18px]" style="color: rgba(255,255,255,0.45); font-family: 'Google Sans', sans-serif;">
+        <div style="font-size: 18px; color: rgba(0,0,0,0.45); font-family: 'Google Sans', sans-serif;">
           tfdevs.com
         </div>
       </div>
-      <!-- TFD Logo — top-right corner -->
-      <img src="/assets/img/tfd_logo.jpeg" alt="TFDevs"
-        style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid #dc2626;" />
+      <!-- TFD Logo -->
+      <img src="/assets/img/tfd_logo.jpeg" alt="TFDevs" style="width: 88px; height: 88px; object-fit: cover;" />
     </div>
 
     <!-- Title -->
     <div
-      style="flex: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding: 32px 0;">
+      style="flex: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding: 36px 0; position: relative; z-index: 1;">
       <h1
-        style="font-size: 68px; font-weight: 600; line-height: 1.2; margin: 0; color: white; overflow: hidden; max-height: 256px; font-family: 'Google Sans', sans-serif;">
+        style="font-size: 66px; font-weight: 700; line-height: 1.22; margin: 0; color: #111111; overflow: hidden; max-height: 264px; font-family: 'Google Sans', sans-serif;">
         {{ title }}
       </h1>
     </div>
 
-    <!-- Footer: author + date -->
-    <div class="flex items-center justify-between">
-      <div class="flex items-center gap-4">
-        <div style="width: 4px; height: 48px; background: #dc2626; border-radius: 2px; flex-shrink: 0;" />
-        <div class="flex flex-col gap-1">
-          <span style="font-size: 24px; font-weight: 500; color: white; font-family: 'Google Sans', sans-serif;">{{
+    <!-- Footer: author + date + label -->
+    <div style="display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="width: 5px; height: 52px; background: #e74c3c; border-radius: 3px; flex-shrink: 0;" />
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <span style="font-size: 24px; font-weight: 600; color: #111111; font-family: 'Google Sans', sans-serif;">{{
             author }}</span>
-          <span v-if="date"
-            style="font-size: 18px; color: rgba(255,255,255,0.45); font-family: 'Google Sans', sans-serif;">{{ date
-            }}</span>
+          <span v-if="date" style="font-size: 17px; color: rgba(0,0,0,0.45); font-family: 'Google Sans', sans-serif;">{{
+            date
+          }}</span>
         </div>
       </div>
-      <div style="font-size: 20px; color: rgba(255,255,255,0.3); font-family: 'Google Sans', sans-serif;">
+      <div
+        style="font-size: 17px; font-weight: 700; color: #e74c3c; letter-spacing: 3px; text-transform: uppercase; font-family: 'Google Sans', sans-serif; border: 2px solid #e74c3c; padding: 6px 16px; border-radius: 6px;">
         Article
       </div>
     </div>
