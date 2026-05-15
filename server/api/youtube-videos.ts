@@ -36,7 +36,7 @@ export default defineEventHandler(async (event): Promise<YoutubeVideo[]> => {
     // via nodejs_compat when the secret is set in Cloudflare dashboard
     console.log('[youtube-videos] Handling request, reading API key from config...')
     const config = useRuntimeConfig(event)
-    const apiKey: string = config.youtubeApiKey || process.env.YOUTUBE_API_KEY || ''
+    const apiKey: string = config.youtubeApiKey || process.env.NUXT_YOUTUBE_API_KEY || ''
     const channelId = 'UCJHZ__wUxS9lgTZHMxpMJcQ'
 
     if (!apiKey) {

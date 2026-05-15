@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Server-only — reads YOUTUBE_API_KEY from .env in dev,
     // and from Cloudflare Pages env vars (plain text) in prod
-    youtubeApiKey: process.env.YOUTUBE_API_KEY ?? '',
+    youtubeApiKey: process.env.NUXT_YOUTUBE_API_KEY ?? '',
   },
   modules: [
     '@nuxt/ui',
