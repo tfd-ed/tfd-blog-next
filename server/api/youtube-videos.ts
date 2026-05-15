@@ -44,6 +44,7 @@ export default defineEventHandler(async (event): Promise<YoutubeVideo[]> => {
     }
 
     try {
+        console.log('[youtube-videos] Fetching videos from YouTube API...')
         const channelRes = await $fetch<ChannelRes>(
             `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`
         )
