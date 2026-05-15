@@ -31,6 +31,11 @@ interface VideoDetailsRes {
 import { useRuntimeConfig } from '#imports'
 
 export default defineEventHandler(async (event): Promise<YoutubeVideo[]> => {
+    // Prevent Cloudflare and other CDNs from caching API responses
+    setResponseHeaders(event, {
+        'Cache-Control': 'no-store',
+    })
+
     // useRuntimeConfig(event) reads from runtimeConfig in nuxt.config
     // which resolves process.env.YOUTUBE_API_KEY — populated by CF Workers
     // via nodejs_compat when the secret is set in Cloudflare dashboard

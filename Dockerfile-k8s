@@ -43,6 +43,8 @@ RUN apk add --no-cache libstdc++
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=3000
+ENV NITRO_HOST=0.0.0.0
+ENV NITRO_PORT=3000
 
 # Create a non-root user
 RUN addgroup --system --gid 1001 nodejs && \
