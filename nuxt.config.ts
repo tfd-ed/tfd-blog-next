@@ -94,7 +94,7 @@ export default defineNuxtConfig({
   //   }
   // },
   experimental: {
-    payloadExtraction: isDev ? false : true,
+    payloadExtraction: false,
   },
   app: {
     pageTransition: { name: 'page' }
