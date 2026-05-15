@@ -88,14 +88,6 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-  // icon: {
-  //   serverBundle: {
-  //     collections: ['lucide']
-  //   }
-  // },
-  experimental: {
-    payloadExtraction: false,
-  },
   app: {
     pageTransition: { name: 'page' }
   },
