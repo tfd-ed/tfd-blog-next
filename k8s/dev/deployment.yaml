@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tfd-blog-dev
+  namespace: dev
+  labels:
+    app: tfd-blog
+    environment: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tfd-blog
+      environment: dev
+  template:
+    metadata:
+      labels:
+        app: tfd-blog
+        environment: dev
+      annotations:
+        # Auto-restart on config/secret changes
+        reloader.stakater.com/auto: "true"
+    spec:
+      containers:
+        - name: tfd-blog
+          image: registry.homelab.local/tfd-blog:dev-latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: "development"
+            - name: HOST
+              value: "0.0.0.0"
+            - name: PORT
+              value: "3000"
+            - name: NUXT_YOUTUBE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: tfd-blog-secrets
+                  key: youtube-api-key
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 12
+      restartPolicy: Always

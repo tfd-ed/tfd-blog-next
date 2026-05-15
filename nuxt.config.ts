@@ -167,11 +167,6 @@ export default defineNuxtConfig({
       // Use in-memory storage in dev to avoid EISDIR conflict where
       // nuxt/payload/ directory and nuxt/payload file path collide
       nuxt: { driver: 'memory' }
-    },
-    preset: "cloudflare-pages",
-    cloudflare: {
-      deployConfig: true,
-      nodeCompat: true
     }
   },
   devtools: { enabled: true }
