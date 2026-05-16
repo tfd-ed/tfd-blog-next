@@ -96,9 +96,9 @@ export default defineNuxtConfig({
       baseURL: 'https://tfdevs.com'
     }
   },
-  ogImage: {
-    zeroRuntime: true
-  },
+  // ogImage: {
+  //   zeroRuntime: true
+  // },
   vite: {
     optimizeDeps: {
       include: [
@@ -159,7 +159,7 @@ export default defineNuxtConfig({
       // '/playrooms/summarization': { ssr: false },
       // '/en/playrooms/summarization': { ssr: false },
       // OG images - long cache (they rarely change)
-      '/__og-image__/**': { headers: { 'cache-control': 'public, max-age=86400, stale-while-revalidate=604800' } },
+      // '/__og-image__/**': { headers: { 'cache-control': 'public, max-age=86400, stale-while-revalidate=604800' } },
       // Static assets - very long cache (fingerprinted by Vite)
       '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     },
