@@ -1,7 +1,7 @@
 ---
 title: "Modern Frontend Development: The Shift Toward Full-Stack Engineering"
 description: Explore why modern frontend development now requires knowledge beyond HTML/CSS, including SSR, APIs, and full infrastructure, to survive in the era of Next.js and Nuxt.
-date: 2026-05-14
+date: 2026-05-16
 image: /images/articles/ssr2/ssr2.jpg
 tags: ['Frontend', 'Server-Side Rendering', 'FullStack']
 author: ចៅ ដារ៉ា

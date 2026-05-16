@@ -1,7 +1,7 @@
 ---
 title: Frontend សម័យឥឡូវ៖ លើសពីការធ្វើ UI គឺការយល់ដឹងពី System ទាំងមូល
 description: ស្វែងយល់ពីការវិវត្តនៃ Frontend Engineering ដែលកំពុងក្លាយជា Full-stack។ ហេតុអ្វីបានជា Framework ដូចជា Next.js ផ្លាស់ប្តូរតួនាទីរបស់យើងពីអ្នកឌីហ្សាញ Layout មកជាអ្នកគ្រប់គ្រង Infrastructure និងយុទ្ធសាស្ត្រ Backend?
-date: 2026-05-14
+date: 2026-05-16
 image: /images/articles/ssr2/ssr2.jpg
 tags: ['Frontend', 'Server-Side Rendering', 'FullStack']
 author: ចៅ ដារ៉ា
