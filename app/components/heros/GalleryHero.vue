@@ -141,7 +141,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 interface Image {
@@ -191,6 +191,16 @@ useIntersectionObserver(ytWidget, ([entry]) => {
 }, { threshold: 0.3 })
 
 onMounted(() => {
+    // Populate tiles client-side only to avoid SSR/hydration mismatch from Math.random()
+    if (props.images.length) {
+        const half1a = spreadFill(props.images, HALF)
+        const half1b = spreadFill(props.images, HALF)
+        row1Tiles.value = [...half1a, ...half1b]
+        const half2a = spreadFill(props.images, HALF)
+        const half2b = spreadFill(props.images, HALF)
+        row2Tiles.value = [...half2a, ...half2b]
+    }
+
     if (ytWidget.value) {
         const rect = ytWidget.value.getBoundingClientRect()
         if (rect.top < window.innerHeight && !hasAnimated.value) {
@@ -273,16 +283,11 @@ function spreadFill(images: Image[], count: number): { image: Image; config: typ
 
 // 40 unique tiles per half-row; duplicate each half so translateX(-50%) loops perfectly
 const HALF = 40
-const row1Tiles = computed(() => {
-    if (!props.images.length) return []
-    const half = spreadFill(props.images, HALF)
-    return [...half, ...half]
-})
-const row2Tiles = computed(() => {
-    if (!props.images.length) return []
-    const half = spreadFill(props.images, HALF)
-    return [...half, ...half]
-})
+// Tiles are populated only on the client (onMounted) to avoid SSR/hydration mismatch
+// caused by Math.random() producing different shuffle results on server vs client.
+type Tile = { image: Image; config: typeof tileConfigs[number] }
+const row1Tiles = ref<Tile[]>([])
+const row2Tiles = ref<Tile[]>([])
 </script>
 
 <style scoped>
