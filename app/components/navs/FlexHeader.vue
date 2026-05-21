@@ -5,7 +5,7 @@
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <NuxtLink class="flex-none text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
-                    to="/">
+                    :to="localePath('/')">
                     <img class="h-10 rounded-md p-1" src="~/assets/img/tfd_logo.jpeg" alt="TFD Logo" />
                 </NuxtLink>
                 <!-- End Logo -->
@@ -116,6 +116,7 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 
 const { locale, setLocale, t } = useI18n()
 const route = useRoute()
+const localePath = useLocalePath()
 
 // Mobile menu state
 const isMobileMenuOpen = ref(false)
@@ -138,7 +139,7 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
     return [
         {
             label: t('home'),
-            to: '/',
+            to: localePath('/'),
             active: currentPath === '/'
         },
         // {
@@ -148,7 +149,7 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
         // },
         {
             label: t('articles'),
-            to: '/articles',
+            to: localePath('/articles'),
             active: currentPath.startsWith('/articles')
         },
         // {
@@ -174,7 +175,7 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
         // },
         {
             label: t('about_us'),
-            to: '/about-us',
+            to: localePath('/about-us'),
             active: currentPath.startsWith('/about-us')
         }
     ]

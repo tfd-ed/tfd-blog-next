@@ -136,7 +136,7 @@ export default defineNuxtConfig({
       '/': isDev ? {} : { isr: 3600, headers: { 'cache-control': 'no-store' } },
       '/en': isDev ? {} : { isr: 3600, headers: { 'cache-control': 'no-store' } },
       // YouTube API: Nitro ISR saves quota, but CDN must not cache (no-store)
-      '/api/youtube-videos': isDev ? {} : { isr: 3600, headers: { 'cache-control': 'no-store' } },
+      // '/api/youtube-videos': isDev ? {} : { isr: 3600, headers: { 'cache-control': 'no-store' } },
       '/about-us': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
       '/en/about-us': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },
       // '/services': isDev ? {} : { isr: 86400, headers: { 'cache-control': 's-maxage=86400, stale-while-revalidate=604800' } },

@@ -11,19 +11,13 @@
 
         <!-- Article Header -->
         <article class="prose prose-lg dark:prose-invert max-w-none">
-            <!-- Featured Image -->
-            <div v-if="article.image" class="mb-8 -mx-4 sm:mx-0">
-                <NuxtImg :src="article.image" :alt="article.title" provider="cloudflare"
-                    class="w-full h-64 sm:h-96 object-cover rounded-lg shadow-lg" />
-            </div>
-
             <!-- Title -->
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-relaxed">
                 {{ article.title }}
             </h1>
 
             <!-- Meta Information -->
-            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-8 not-prose">
+            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-6 not-prose">
                 <span v-if="article.author" class="flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -48,28 +42,37 @@
             </div>
 
             <!-- Tags -->
-            <div v-if="article.tags && article.tags.length > 0" class="flex flex-wrap gap-2 mb-8 not-prose">
+            <div v-if="article.tags && article.tags.length > 0" class="flex flex-wrap gap-2 mb-6 not-prose">
                 <span v-for="tag in article.tags" :key="tag"
                     class="px-3 py-1 text-sm font-medium bg-tfd/10 text-tfd dark:bg-tfd/20 rounded-full">
                     {{ tag }}
                 </span>
             </div>
 
-            <!-- Share Buttons -->
-            <div class="not-prose mb-8">
-                <SocialShareButtons />
-            </div>
-
             <!-- Description -->
             <div v-if="article.description"
-                class="not-prose border-l-4 border-tfd bg-tfd/5 dark:bg-tfd/10 rounded-r-lg px-5 py-4 mb-8">
+                class="not-prose border-l-4 border-tfd bg-tfd/5 dark:bg-tfd/10 rounded-r-lg px-5 py-4 mb-6">
                 <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed italic">
                     {{ article.description }}
                 </p>
             </div>
 
+            <!-- Share Buttons -->
+            <div class="not-prose mb-6">
+                <SocialShareButtons />
+            </div>
+
+            <!-- Featured Image -->
+            <div v-if="article.image" class="not-prose mb-8">
+                <div
+                    class="w-full max-w-2xl mx-auto overflow-hidden rounded-xl shadow-md border border-gray-100 dark:border-gray-800">
+                    <NuxtImg :src="article.image" :alt="article.title" provider="cloudflare"
+                        class="w-full aspect-video object-cover" />
+                </div>
+            </div>
+
             <!-- Divider -->
-            <hr v-if="article.description" class="not-prose border-gray-200 dark:border-gray-700 mb-8" />
+            <hr class="not-prose border-gray-200 dark:border-gray-700 mb-8" />
 
             <!-- Article Content -->
             <div class="article-content">
