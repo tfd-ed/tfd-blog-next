@@ -20,12 +20,9 @@
     <ReachUs /> -->
 </template>
 <script setup lang="ts">
-const { data: latestVideos, error: videosError } = await useFetch('/api/youtube-videos', {
+const { data: latestVideos } = await useFetch('/api/youtube-videos', {
     default: () => []
 })
-if (videosError.value) {
-    console.error('[index] YouTube videos fetch failed:', videosError.value)
-}
 
 const images = [
     {

@@ -20,6 +20,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Fetch YouTube videos
+        env:
+          NUXT_YOUTUBE_API_KEY: ${{ secrets.NUXT_YOUTUBE_API_KEY }}
+        run: node scripts/fetch-youtube-videos.mjs
+
       - name: Build Docker image
         run: |
           docker build -f Dockerfile-k8s . \
