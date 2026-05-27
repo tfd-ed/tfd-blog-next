@@ -4,13 +4,15 @@
         :author="$t('heros.chau_dara')" :authorTitle="$t('heros.founder')" :showCTA="true" :images="images"
         :subscriber-count="44" channel-link="https://www.youtube.com/@tfdevs" />
 
+    <div class="container mx-auto px-4">
+        <ConnectWithUs :socialLinks="socialLinks" />
+    </div>
+
     <!-- Latest Articles + Videos -->
     <LatestFeed :videos="latestVideos" channel-link="https://www.youtube.com/@tfdevs" />
 
     <!-- Connect With Us Component -->
-    <div class="container mx-auto px-4 py-8">
-        <ConnectWithUs :socialLinks="socialLinks" />
-    </div>
+
 
 
     <!-- <Client />
