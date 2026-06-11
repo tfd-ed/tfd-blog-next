@@ -6,6 +6,7 @@ image: /images/articles/ssr2/ssr2.jpg
 tags: ['Supply Chain', 'Security', 'Cybersecurity']
 author: ចៅ ដារ៉ា
 readTime: 15 minutes
+published: false
 ---
 
 Software supply chain attacks have become one of the most dangerous threats in modern software engineering because they don’t target applications directly—they target everything your application depends on. Instead of breaking into your server or exploiting your API, attackers compromise upstream components like open-source packages, CI/CD systems, developer tools, or even build pipelines. Once a trusted dependency is poisoned, the malicious code quietly propagates to every project that uses it.

@@ -8,7 +8,8 @@ const commonSchema = z.object({
     image: z.string().optional(),
     date: z.union([z.string(), z.date()]).optional(),
     author: z.string().optional(),
-    readTime: z.string().optional()
+    readTime: z.string().optional(),
+    published: z.boolean().optional().default(false)
 })
 
 export default defineContentConfig({

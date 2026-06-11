@@ -6,6 +6,7 @@ image: /images/articles/ssr2/ssr2.jpg
 tags: ['Frontend', 'Server-Side Rendering', 'FullStack']
 author: ចៅ ដារ៉ា
 readTime: 10 minutes
+published: true
 ---
 
 ការធ្វើ Frontend សម័យឥឡូវ កំពុងវិវត្តទៅជាការងារបែប Full-stack 

@@ -6,6 +6,7 @@ image: /images/articles/framework/framework.png
 tags: ['Framework', 'Tech Industry', 'FullStack']
 author: Chau Dara
 readTime: 10 minutes
+published: true
 ---
 
 Many people believe that studying a programming framework alone is enough to guarantee a software engineering job, but this is often not true. Frameworks such as React, NestJS, or Flutter are only tools used to build applications, while companies are actually looking for problem-solving ability, practical experience, and strong fundamentals. 

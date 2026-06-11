@@ -6,6 +6,7 @@ image: /images/articles/ai-usage-discipline/ai-usage-discipline.png
 tags: ['AI', 'Learning', 'Discipline']
 author: Chau Dara
 readTime: 10 minutes
+published: true
 ---
 
 Students who rely too heavily on AI early in their learning may become efficient but miss out on the struggle that builds resilience, problem-solving ability, and confidence. 

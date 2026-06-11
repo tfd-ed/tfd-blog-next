@@ -6,6 +6,7 @@ image: /images/articles/ai-usage-discipline/ai-usage-discipline.png
 tags: ['AI', 'Learning', 'Discipline']
 author: ចៅ ដារ៉ា
 readTime: 10 minutes
+published: true
 ---
 
 ពេលប្រលងគេបើកចាក់គ្រប់គ្នា តែមានម្នាក់នោះសុខចិត្តធ្វើតាមសម្ថភាព!

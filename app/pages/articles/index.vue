@@ -107,6 +107,7 @@ const { data: articles } = await useAsyncData(
         const collection = ('content_' + locale.value) as keyof Collections
         const results = await queryCollection(collection)
             .where('path', 'LIKE', '/articles/%')
+            .where('published', '=', true)
             .all()
 
         // Sort by date in JavaScript (newest first)

@@ -6,6 +6,7 @@ image: /images/articles/ssr2/ssr2.jpg
 tags: ['Frontend', 'Server-Side Rendering', 'FullStack']
 author: ចៅ ដារ៉ា
 readTime: 10 minutes
+published: true
 ---
 Modern frontend development is increasingly becoming full-stack engineering, especially with the rise of SSR frameworks like Next.js, Nuxt, and SvelteKit. In the past, frontend development was mostly about HTML, CSS, and JavaScript running entirely in the browser — developers focused mainly on layouts, styling, animations, and user interactions. 
 
