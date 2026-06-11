@@ -1,6 +1,6 @@
 <template>
     <header class="sticky top-4 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full">
-        <nav class="relative max-w-[66rem] w-full bg-white/90 backdrop-blur-md dark:bg-gray-900/90 border border-gray-200/50 dark:border-gray-700/50 rounded-[8px] py-3 ps-5 pe-2 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto shadow-lg transition-colors duration-300"
+        <nav class="relative max-w-[66rem] w-full bg-white/90 backdrop-blur-md dark:bg-gray-900/90 border border-gray-200/50 dark:border-gray-700/50 rounded-[8px] py-3 ps-3 pe-2 md:ps-5 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto shadow-lg transition-colors duration-300"
             aria-label="Global">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
@@ -10,17 +10,53 @@
                 </NuxtLink>
                 <!-- End Logo -->
 
-                <!-- Mobile Toggle Button -->
-                <div class="md:hidden">
+                <!-- Mobile Essential Navigation (visible on mobile) -->
+                <div class="flex md:hidden items-center gap-1.5">
+                    <!-- Home -->
+                    <NuxtLink :to="localePath('/')" :class="[
+                        'flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-medium transition-all',
+                        route.path === localePath('/')
+                            ? 'bg-gray-200 dark:bg-gray-700 text-tfd'
+                            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ]">
+                        <UIcon name="i-lucide-home" class="w-4 h-4" />
+                    </NuxtLink>
+
+                    <!-- Articles -->
+                    <NuxtLink :to="localePath('/articles')" :class="[
+                        'flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-medium transition-all',
+                        route.path.startsWith(localePath('/articles'))
+                            ? 'bg-gray-200 dark:bg-gray-700 text-tfd'
+                            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ]">
+                        <UIcon name="i-lucide-newspaper" class="w-4 h-4" />
+                    </NuxtLink>
+
+                    <!-- Collaborate - Highlighted CTA -->
+                    <NuxtLink :to="localePath('/collaborate')" :class="[
+                        'flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-medium transition-all',
+                        route.path.startsWith(localePath('/collaborate'))
+                            ? 'bg-tfd text-white shadow-md'
+                            : 'bg-tfd/10 text-tfd hover:bg-tfd hover:text-white'
+                    ]">
+                        <UIcon name="i-lucide-handshake" class="w-4 h-4" />
+                    </NuxtLink>
+
+                    <!-- Dark Mode Toggle -->
+                    <div class="pl-1">
+                        <DarkModeToggle />
+                    </div>
+
+                    <!-- Mobile Toggle Button for More Options -->
                     <button @click="toggleMobileMenu" type="button"
-                        class="size-8 flex justify-center items-center text-sm font-semibold rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white disabled:opacity-50 disabled:pointer-events-none transition-colors duration-300"
-                        aria-label="Toggle navigation">
+                        class="size-8 flex justify-center items-center text-sm font-semibold rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white disabled:opacity-50 disabled:pointer-events-none transition-colors duration-300"
+                        aria-label="More options">
                         <svg v-if="!isMobileMenuOpen" class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="3" x2="21" y1="6" y2="6" />
-                            <line x1="3" x2="21" y1="12" y2="12" />
-                            <line x1="3" x2="21" y1="18" y2="18" />
+                            <circle cx="12" cy="12" r="1" />
+                            <circle cx="12" cy="5" r="1" />
+                            <circle cx="12" cy="19" r="1" />
                         </svg>
                         <svg v-else class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
                             height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -72,36 +108,37 @@
             <div v-show="isMobileMenuOpen"
                 class="md:hidden overflow-hidden transition-all duration-300 basis-full grow mt-5">
                 <div class="flex flex-col gap-y-4">
-                    <UNavigationMenu :items="navigationItems" orientation="vertical" color="neutral" variant="pill" :ui="{
-                        link: 'text-base font-medium'
-                    }" />
+                    <!-- Secondary Navigation Links -->
+                    <div class="flex flex-col gap-y-2">
+                        <!-- Playrooms -->
+                        <a href="https://ai.tfdevs.com" target="_blank"
+                            class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                            <UIcon name="i-lucide-rocket" class="w-5 h-5 text-tfd" />
+                            <span>{{ t('playrooms') }}</span>
+                            <UIcon name="i-lucide-external-link" class="w-4 h-4 ml-auto opacity-50" />
+                        </a>
 
-                    <div class="flex flex-col gap-y-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                        <DarkModeToggle />
-                        <div class="flex items-center justify-between">
+                        <!-- About Us -->
+                        <NuxtLink :to="localePath('/about-us')" :class="[
+                            'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all',
+                            route.path.startsWith(localePath('/about-us'))
+                                ? 'bg-gray-200 dark:bg-gray-700 text-tfd'
+                                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        ]">
+                            <UIcon name="i-lucide-info" class="w-5 h-5 text-tfd" />
+                            <span>{{ t('about_us') }}</span>
+                        </NuxtLink>
+                    </div>
 
-                            <!-- <div class="flex items-center space-x-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
-                                <button @click="setLocale('en')" :class="[
-                                    'flex items-center space-x-1 px-2 py-1 rounded-md text-xs sm:text-sm font-medium transition-colors',
-                                    locale === 'en'
-                                        ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 shadow-sm'
-                                        : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-600'
-                                ]">
-                                    <NuxtImg src="/images/flags/uk.png" alt="English" width="20" height="14"
-                                        :provider="imageProvider" />
-                                    <span class="hidden sm:inline">{{ $t('english') }}</span>
-                                </button>
-                                <button @click="setLocale('km')" :class="[
-                                    'flex items-center space-x-1 px-2 py-1 rounded-md text-xs sm:text-sm font-medium transition-colors',
-                                    locale === 'km'
-                                        ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 shadow-sm'
-                                        : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-600'
-                                ]">
-                                    <NuxtImg src="/images/flags/kh.png" alt="Khmer" width="20" height="14"
-                                        :provider="imageProvider" />
-                                    <span class="hidden sm:inline">{{ $t('khmer') }}</span>
-                                </button>
-                            </div> -->
+                    <!-- Settings Section -->
+                    <div class="flex flex-col gap-y-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <div
+                            class="px-4 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                            {{ t('settings') }}
+                        </div>
+                        <div class="flex items-center justify-between px-4">
+                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('language')
+                                }}</span>
                             <language-switcher />
                         </div>
                     </div>

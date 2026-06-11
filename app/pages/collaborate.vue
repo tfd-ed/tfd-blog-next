@@ -219,7 +219,7 @@ const budgetOptions = computed(() => [
                 style="mask-image: radial-gradient(ellipse 90% 85% at 50% 50%, black 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 50%, black 30%, transparent 75%);">
                 <!-- Bubble fill -->
                 <div
-                    class="absolute inset-0 bg-linear-to-br from-gray-100 via-white to-gray-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 transition-colors duration-300">
+                    class="absolute inset-0 bg-linear-to-br from-gray-100 via-white to-gray-50 dark:bg-linear-to-tl dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-950 transition-colors duration-300">
                 </div>
                 <!-- Blurred TFD orbs -->
                 <div
@@ -292,21 +292,20 @@ const budgetOptions = computed(() => [
                 <!-- Animated collaborators marquee -->
                 <div class="mt-16 relative">
                     <div
-                        class="absolute inset-0 bg-linear-to-r from-white via-transparent to-white dark:from-neutral-950 dark:via-transparent dark:to-neutral-950 pointer-events-none z-10">
-                    </div>
-                    <div class="overflow-hidden">
-                        <div class="flex gap-8 sm:gap-12 animate-marquee-rtl">
-                            <!-- First set of logos -->
+                        class="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+                        <div class="flex w-max gap-8 sm:gap-12 animate-marquee-rtl">
+                            <!-- First set -->
                             <div v-for="collab in collaborators" :key="`${collab.name}-1`"
-                                class="shrink-0 hover:opacity-50 transition-all duration-300">
+                                class="shrink-0 grayscale opacity-40 dark:opacity-50 hover:opacity-70 hover:grayscale-0 transition-all duration-300">
                                 <img :src="collab.logo" :alt="collab.name"
-                                    class="h-12 sm:h-16 w-auto object-contain logo-strip-bg" />
+                                    class="h-12 sm:h-16 w-auto object-contain dark:brightness-[3] dark:invert" />
                             </div>
-                            <!-- Duplicate set for seamless loop -->
+
+                            <!-- Duplicate set -->
                             <div v-for="collab in collaborators" :key="`${collab.name}-2`"
-                                class="shrink-0 hover:opacity-50 transition-all duration-300">
+                                class="shrink-0 grayscale opacity-40 dark:opacity-50 hover:opacity-70 hover:grayscale-0 transition-all duration-300">
                                 <img :src="collab.logo" :alt="collab.name"
-                                    class="h-12 sm:h-16 w-auto object-contain logo-strip-bg" />
+                                    class="h-12 sm:h-16 w-auto object-contain dark:brightness-[3] dark:invert" />
                             </div>
                         </div>
                     </div>
@@ -322,7 +321,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.why_eyebrow')
-                    }}</p>
+                        }}</p>
                     <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                         {{ t('collab.why_title') }}
                     </h2>
@@ -443,17 +442,15 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              PREVIOUS COLLABORATIONS
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="relative py-12 lg:py-24 overflow-hidden bg-white dark:bg-neutral-950">
+        <section class="relative py-12 lg:py-24 overflow-hidden bg-white">
             <!-- Blur gradient orbs -->
             <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-                <div
-                    class="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-tfd/8 dark:bg-tfd/12 blur-[120px]">
+                <div class="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-tfd/8 blur-[120px]">
+                </div>
+                <div class="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-red-400/10 blur-[100px]">
                 </div>
                 <div
-                    class="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-red-400/10 dark:bg-red-600/10 blur-[100px]">
-                </div>
-                <div
-                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-orange-300/6 dark:bg-orange-400/6 blur-[140px]">
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-orange-300/6 blur-[140px]">
                 </div>
             </div>
 
@@ -462,11 +459,10 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-16">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-3">{{
                         t('collab.partners_eyebrow') }}</p>
-                    <h2
-                        class="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
+                    <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
                         {{ t('collab.partners_title') }}
                     </h2>
-                    <p class="text-base text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    <p class="text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">
                         {{ t('collab.partners_desc') }}
                     </p>
                     <!-- Decorative rule -->
@@ -481,7 +477,7 @@ const budgetOptions = computed(() => [
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5">
                     <a v-for="collab in collaborators" :key="collab.name" :href="collab.url" target="_blank"
                         rel="noopener noreferrer"
-                        class="group relative flex flex-col items-center justify-between gap-3 sm:gap-5 p-4 sm:p-7 rounded-2xl sm:rounded-3xl border border-gray-100 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-sm hover:border-tfd/40 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                        class="group relative flex flex-col items-center justify-between gap-3 sm:gap-5 p-4 sm:p-7 rounded-2xl sm:rounded-3xl border border-gray-100 bg-white/70 backdrop-blur-sm hover:border-tfd/40 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
                         <!-- Card inner glow on hover -->
                         <div
                             class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-tfd/5 to-transparent rounded-3xl pointer-events-none">
@@ -489,11 +485,11 @@ const budgetOptions = computed(() => [
                         <!-- Logo -->
                         <div class="relative w-full h-14 sm:h-20 flex items-center justify-center">
                             <img :src="collab.logo" :alt="collab.name"
-                                class="max-w-full max-h-full object-contain dark:brightness-90 dark:contrast-110 group-hover:scale-110 transition-transform duration-300" />
+                                class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-sm" />
                         </div>
                         <!-- Name -->
                         <span
-                            class="text-xs font-semibold text-gray-400 dark:text-gray-500 group-hover:text-tfd text-center leading-snug transition-colors duration-200">
+                            class="text-xs font-semibold text-gray-400 group-hover:text-tfd text-center leading-snug transition-colors duration-200">
                             {{ collab.name }}
                         </span>
                         <!-- Corner accent -->
@@ -506,7 +502,7 @@ const budgetOptions = computed(() => [
                 <!-- Bottom trust badge -->
                 <div class="mt-8 lg:mt-16 flex justify-center">
                     <div
-                        class="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-gray-100 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm text-sm text-gray-500 dark:text-gray-400 shadow-sm">
+                        class="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-gray-100 bg-white/80 backdrop-blur-sm text-sm text-gray-500 shadow-sm">
                         <UIcon name="i-lucide-shield-check" class="w-4 h-4 text-tfd shrink-0" />
                         {{ t('collab.trust_transparent') }}
                     </div>
@@ -680,7 +676,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.cta_eyebrow')
-                    }}</p>
+                        }}</p>
                     <h2
                         class="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 max-w-3xl mx-auto leading-tight">
                         {{ t('collab.cta_title') }}
@@ -856,33 +852,5 @@ const budgetOptions = computed(() => [
 
 .animate-marquee-rtl:hover {
     animation-play-state: paused;
-}
-
-/* Strip white backgrounds from logos */
-.logo-strip-bg {
-    opacity: 0.35;
-    filter: grayscale(1) contrast(1.3) brightness(0.85);
-    mix-blend-mode: multiply;
-    transition: all 0.3s ease;
-}
-
-/* Dark mode adjustments */
-:global(.dark) .logo-strip-bg {
-    opacity: 0.25;
-    filter: grayscale(1) contrast(1.2) brightness(1.2) invert(1);
-    mix-blend-mode: screen;
-}
-
-/* Hover effects */
-.logo-strip-bg:hover {
-    opacity: 0.65;
-    filter: grayscale(0) contrast(1) brightness(1);
-    mix-blend-mode: normal;
-}
-
-:global(.dark) .logo-strip-bg:hover {
-    opacity: 0.55;
-    filter: grayscale(0) contrast(1) brightness(1) invert(0);
-    mix-blend-mode: normal;
 }
 </style>
