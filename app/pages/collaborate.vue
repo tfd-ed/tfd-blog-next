@@ -165,10 +165,10 @@ const audienceSegments = computed(() => [
 // ─── Past collaborators ───────────────────────────────────────────────────────
 const collaborators = [
     { name: 'AIESEC in Cambodia', logo: '/images/collabs/aiesec.png', url: 'https://web.facebook.com/share/p/1EmYB78zEQ' },
-    { name: 'Cryptomus', logo: '/images/collabs/cryptomus.jpg', url: 'https://youtu.be/6erO0E8m8Cc?si=F0l1c67mVlEfdf1N' },
-    { name: 'GeeTest', logo: '/images/collabs/geetest.jpg', url: 'https://youtu.be/hKZncFPSXrw?si=shos3ySRZVrVDecw' },
+    { name: 'Cryptomus', logo: '/images/collabs/cryptomus.png', url: 'https://youtu.be/6erO0E8m8Cc?si=F0l1c67mVlEfdf1N' },
+    { name: 'GeeTest', logo: '/images/collabs/geetest.png', url: 'https://youtu.be/hKZncFPSXrw?si=shos3ySRZVrVDecw' },
     { name: 'Mazda Cambodia', logo: '/images/collabs/mazda.svg', url: 'https://www.facebook.com/share/v/1DoqkTbvGY/' },
-    { name: 'Ultrahuman', logo: '/images/collabs/ultrahuman.avif', url: 'https://www.facebook.com/share/v/1B8hoiBTdB/' },
+    { name: 'Ultrahuman', logo: '/images/collabs/ultrahuman.png', url: 'https://www.facebook.com/share/v/1B8hoiBTdB/' },
     { name: 'vCloudia', logo: '/images/collabs/vcloudia.jpg', url: 'https://www.youtube.com/watch?v=qrfAWaibI8Y' },
     { name: 'WeduShare', logo: '/images/collabs/wedushare.png', url: 'https://youtu.be/oq8WlzSTgjA?si=6Bvf8QK0-vAezS58' },
     { name: 'CADT', logo: '/images/collabs/cadt.png', url: 'https://www.facebook.com/share/p/1CvdaoFEVL/' },
@@ -288,6 +288,29 @@ const budgetOptions = computed(() => [
                         {{ t('collab.trust_reach') }}
                     </span>
                 </div>
+
+                <!-- Animated collaborators marquee -->
+                <div class="mt-16 relative">
+                    <div
+                        class="absolute inset-0 bg-linear-to-r from-white via-transparent to-white dark:from-neutral-950 dark:via-transparent dark:to-neutral-950 pointer-events-none z-10">
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="flex gap-8 sm:gap-12 animate-marquee-rtl">
+                            <!-- First set of logos -->
+                            <div v-for="collab in collaborators" :key="`${collab.name}-1`"
+                                class="shrink-0 hover:opacity-50 transition-all duration-300">
+                                <img :src="collab.logo" :alt="collab.name"
+                                    class="h-12 sm:h-16 w-auto object-contain logo-strip-bg" />
+                            </div>
+                            <!-- Duplicate set for seamless loop -->
+                            <div v-for="collab in collaborators" :key="`${collab.name}-2`"
+                                class="shrink-0 hover:opacity-50 transition-all duration-300">
+                                <img :src="collab.logo" :alt="collab.name"
+                                    class="h-12 sm:h-16 w-auto object-contain logo-strip-bg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -299,7 +322,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.why_eyebrow')
-                        }}</p>
+                    }}</p>
                     <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                         {{ t('collab.why_title') }}
                     </h2>
@@ -466,7 +489,7 @@ const budgetOptions = computed(() => [
                         <!-- Logo -->
                         <div class="relative w-full h-14 sm:h-20 flex items-center justify-center">
                             <img :src="collab.logo" :alt="collab.name"
-                                class="max-w-full max-h-full object-contain dark:brightness-90 dark:contrast-110 group-hover:scale-110 transition-transform duration-300 drop-shadow-sm" />
+                                class="max-w-full max-h-full object-contain dark:brightness-90 dark:contrast-110 group-hover:scale-110 transition-transform duration-300" />
                         </div>
                         <!-- Name -->
                         <span
@@ -657,7 +680,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.cta_eyebrow')
-                        }}</p>
+                    }}</p>
                     <h2
                         class="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 max-w-3xl mx-auto leading-tight">
                         {{ t('collab.cta_title') }}
@@ -815,3 +838,51 @@ const budgetOptions = computed(() => [
 
     </div>
 </template>
+
+<style scoped>
+@keyframes marquee-rtl {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee-rtl {
+    animation: marquee-rtl 40s linear infinite;
+}
+
+.animate-marquee-rtl:hover {
+    animation-play-state: paused;
+}
+
+/* Strip white backgrounds from logos */
+.logo-strip-bg {
+    opacity: 0.35;
+    filter: grayscale(1) contrast(1.3) brightness(0.85);
+    mix-blend-mode: multiply;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode adjustments */
+:global(.dark) .logo-strip-bg {
+    opacity: 0.25;
+    filter: grayscale(1) contrast(1.2) brightness(1.2) invert(1);
+    mix-blend-mode: screen;
+}
+
+/* Hover effects */
+.logo-strip-bg:hover {
+    opacity: 0.65;
+    filter: grayscale(0) contrast(1) brightness(1);
+    mix-blend-mode: normal;
+}
+
+:global(.dark) .logo-strip-bg:hover {
+    opacity: 0.55;
+    filter: grayscale(0) contrast(1) brightness(1) invert(0);
+    mix-blend-mode: normal;
+}
+</style>
