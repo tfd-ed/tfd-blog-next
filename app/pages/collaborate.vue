@@ -235,41 +235,42 @@ const budgetOptions = computed(() => [
                 </div>
             </div>
 
-            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 lg:py-36 text-center">
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-32 text-center">
                 <!-- Badge -->
                 <div
-                    class="inline-flex items-center gap-2 bg-tfd/15 border border-tfd/30 rounded-full px-4 py-2 text-sm font-medium mb-8 text-tfd">
-                    <UIcon name="i-lucide-globe" class="w-4 h-4" />
+                    class="inline-flex items-center gap-2 bg-tfd/15 border border-tfd/30 rounded-full px-3 py-1.5 text-xs sm:text-sm font-medium mb-6 text-tfd">
+                    <UIcon name="i-lucide-globe" class="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     {{ t('collab.badge') }}
                 </div>
 
                 <h1
-                    class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 max-w-4xl mx-auto text-gray-900 dark:text-white">
+                    class="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4 max-w-4xl mx-auto text-gray-900 dark:text-white">
                     {{ t('collab.hero_title1') }}
                     <span class="text-tfd">{{ t('collab.hero_title_highlight') }}</span>
                     {{ t('collab.hero_title2') }}
                 </h1>
 
                 <p
-                    class="text-lg sm:text-xl text-gray-500 dark:text-neutral-400 max-w-3xl mx-auto mb-10 leading-relaxed">
+                    class="text-base sm:text-xl text-gray-500 dark:text-neutral-400 max-w-3xl mx-auto mb-8 leading-relaxed">
                     {{ t('collab.hero_desc') }}
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a href="#contact"
-                        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-tfd text-white font-semibold rounded-xl hover:bg-red-700 hover:shadow-2xl transition-all duration-200 shadow-lg">
-                        <UIcon name="i-lucide-handshake" class="w-5 h-5" />
+                        class="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-8 sm:py-4 bg-tfd text-white font-semibold rounded-xl hover:bg-red-700 hover:shadow-2xl transition-all duration-200 shadow-lg text-sm sm:text-base">
+                        <UIcon name="i-lucide-handshake" class="w-4 h-4 sm:w-5 sm:h-5" />
                         {{ t('collab.cta_work_with_us') }}
                     </a>
                     <a href="mailto:info@tfdevs.com"
-                        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-gray-300 dark:border-neutral-700 text-gray-600 dark:text-neutral-300 font-semibold rounded-xl hover:border-tfd hover:text-tfd dark:hover:text-white transition-all duration-200">
-                        <UIcon name="i-lucide-mail" class="w-5 h-5" />
+                        class="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-8 sm:py-4 bg-transparent border-2 border-gray-300 dark:border-neutral-700 text-gray-600 dark:text-neutral-300 font-semibold rounded-xl hover:border-tfd hover:text-tfd dark:hover:text-white transition-all duration-200 text-sm sm:text-base">
+                        <UIcon name="i-lucide-mail" class="w-4 h-4 sm:w-5 sm:h-5" />
                         {{ t('collab.cta_contact') }}
                     </a>
                 </div>
 
                 <!-- Trust indicators -->
-                <div class="mt-16 flex flex-wrap justify-center gap-8 text-gray-500 dark:text-neutral-400 text-sm">
+                <div
+                    class="mt-10 flex flex-wrap justify-center gap-4 sm:gap-8 text-gray-500 dark:text-neutral-400 text-xs sm:text-sm">
                     <span class="flex items-center gap-2">
                         <UIcon name="i-lucide-check-circle" class="w-4 h-4 text-tfd" />
                         {{ t('collab.trust_transparent') }}
@@ -293,22 +294,23 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              WHY PARTNER
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="py-20 lg:py-28 bg-white dark:bg-neutral-950">
+        <section class="py-12 lg:py-20 bg-white dark:bg-neutral-950">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <p class="text-tfd font-semibold uppercase tracking-widest text-sm mb-3">{{ t('collab.why_eyebrow')
+                <div class="text-center mb-10 lg:mb-14">
+                    <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
+                        t('collab.why_eyebrow')
                         }}</p>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                         {{ t('collab.why_title') }}
                     </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <p class="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         {{ t('collab.why_desc') }}
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div v-for="reason in whyReasons" :key="reason.title"
-                        class="group relative bg-gray-50 dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl p-8 hover:border-tfd/40 hover:shadow-xl transition-all duration-300">
+                        class="group relative bg-gray-50 dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl p-5 sm:p-7 hover:border-tfd/40 hover:shadow-xl transition-all duration-300">
                         <div
                             class="w-12 h-12 rounded-xl bg-tfd/10 dark:bg-tfd/20 flex items-center justify-center mb-5 group-hover:bg-tfd group-hover:text-white transition-all duration-300">
                             <UIcon :name="reason.icon"
@@ -324,15 +326,15 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              SOCIAL MEDIA REACH
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="py-20 lg:py-28 bg-gray-50 dark:bg-neutral-900">
+        <section class="py-12 lg:py-20 bg-gray-50 dark:bg-neutral-900">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <p class="text-tfd font-semibold uppercase tracking-widest text-sm mb-3">{{
+                <div class="text-center mb-10 lg:mb-14">
+                    <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.reach_eyebrow') }}</p>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                         {{ t('collab.reach_title') }}
                     </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <p class="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         {{ t('collab.reach_desc') }}
                     </p>
                 </div>
@@ -340,7 +342,7 @@ const budgetOptions = computed(() => [
                 <div ref="statsSection" class="max-w-3xl mx-auto space-y-5">
                     <!-- YouTube -->
                     <a :href="ytPlatform.link" target="_blank" rel="noopener noreferrer"
-                        class="flex items-center gap-6 bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-2xl px-8 py-6 hover:shadow-lg hover:border-red-200 dark:hover:border-red-900/50 transition-all duration-300 group">
+                        class="flex items-center gap-4 bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-2xl px-4 sm:px-8 py-4 sm:py-6 hover:shadow-lg hover:border-red-200 dark:hover:border-red-900/50 transition-all duration-300 group">
                         <div class="shrink-0 w-12 h-12 flex items-center justify-center">
                             <svg viewBox="0 0 159 110" class="w-10 h-10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -354,7 +356,7 @@ const budgetOptions = computed(() => [
                             <div class="text-sm text-gray-500 dark:text-gray-400">{{ t('collab.yt_subscribers') }}</div>
                         </div>
                         <div class="text-right shrink-0">
-                            <div class="text-4xl font-bold text-red-600 tabular-nums">{{
+                            <div class="text-2xl sm:text-4xl font-bold text-red-600 tabular-nums">{{
                                 formatCount(ytPlatform.animated.value) }}</div>
                         </div>
                         <UIcon name="i-lucide-arrow-up-right"
@@ -363,7 +365,7 @@ const budgetOptions = computed(() => [
 
                     <!-- Facebook -->
                     <a :href="fbPlatform.link" target="_blank" rel="noopener noreferrer"
-                        class="flex items-center gap-6 bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-2xl px-8 py-6 hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300 group">
+                        class="flex items-center gap-4 bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-2xl px-4 sm:px-8 py-4 sm:py-6 hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-900/50 transition-all duration-300 group">
                         <div class="shrink-0 w-12 h-12 flex items-center justify-center">
                             <svg viewBox="0 0 24 24" class="w-10 h-10" fill="#1877F2"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -376,7 +378,7 @@ const budgetOptions = computed(() => [
                             <div class="text-sm text-gray-500 dark:text-gray-400">{{ t('collab.fb_followers') }}</div>
                         </div>
                         <div class="text-right shrink-0">
-                            <div class="text-4xl font-bold text-blue-600 tabular-nums">{{
+                            <div class="text-2xl sm:text-4xl font-bold text-blue-600 tabular-nums">{{
                                 formatCount(fbPlatform.animated.value) }}</div>
                         </div>
                         <UIcon name="i-lucide-arrow-up-right"
@@ -385,7 +387,7 @@ const budgetOptions = computed(() => [
 
                     <!-- TikTok -->
                     <a :href="ttPlatform.link" target="_blank" rel="noopener noreferrer"
-                        class="flex items-center gap-6 bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-2xl px-8 py-6 hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 group">
+                        class="flex items-center gap-4 bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-2xl px-4 sm:px-8 py-4 sm:py-6 hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 group">
                         <div class="shrink-0 w-12 h-12 flex items-center justify-center">
                             <svg viewBox="0 0 24 24" class="w-9 h-9" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -401,7 +403,7 @@ const budgetOptions = computed(() => [
                             <div class="text-sm text-gray-500 dark:text-gray-400">{{ t('collab.tt_followers') }}</div>
                         </div>
                         <div class="text-right shrink-0">
-                            <div class="text-4xl font-bold text-gray-900 dark:text-white tabular-nums">{{
+                            <div class="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white tabular-nums">{{
                                 formatCount(ttPlatform.animated.value) }}</div>
                         </div>
                         <UIcon name="i-lucide-arrow-up-right"
@@ -418,7 +420,7 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              PREVIOUS COLLABORATIONS
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="relative py-24 lg:py-36 overflow-hidden bg-white dark:bg-neutral-950">
+        <section class="relative py-12 lg:py-24 overflow-hidden bg-white dark:bg-neutral-950">
             <!-- Blur gradient orbs -->
             <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
                 <div
@@ -434,13 +436,14 @@ const budgetOptions = computed(() => [
 
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
-                <div class="text-center mb-20">
-                    <p class="text-tfd font-semibold uppercase tracking-widest text-sm mb-4">{{
+                <div class="text-center mb-10 lg:mb-16">
+                    <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-3">{{
                         t('collab.partners_eyebrow') }}</p>
-                    <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-5 tracking-tight">
+                    <h2
+                        class="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
                         {{ t('collab.partners_title') }}
                     </h2>
-                    <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    <p class="text-base text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
                         {{ t('collab.partners_desc') }}
                     </p>
                     <!-- Decorative rule -->
@@ -452,16 +455,16 @@ const budgetOptions = computed(() => [
                 </div>
 
                 <!-- Logo grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5">
                     <a v-for="collab in collaborators" :key="collab.name" :href="collab.url" target="_blank"
                         rel="noopener noreferrer"
-                        class="group relative flex flex-col items-center justify-between gap-5 p-7 rounded-3xl border border-gray-100 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-sm hover:border-tfd/40 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                        class="group relative flex flex-col items-center justify-between gap-3 sm:gap-5 p-4 sm:p-7 rounded-2xl sm:rounded-3xl border border-gray-100 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-sm hover:border-tfd/40 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
                         <!-- Card inner glow on hover -->
                         <div
                             class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-br from-tfd/5 to-transparent rounded-3xl pointer-events-none">
                         </div>
                         <!-- Logo -->
-                        <div class="relative w-full h-20 flex items-center justify-center">
+                        <div class="relative w-full h-14 sm:h-20 flex items-center justify-center">
                             <img :src="collab.logo" :alt="collab.name"
                                 class="max-w-full max-h-full object-contain dark:brightness-90 dark:contrast-110 group-hover:scale-110 transition-transform duration-300 drop-shadow-sm" />
                         </div>
@@ -478,7 +481,7 @@ const budgetOptions = computed(() => [
                 </div>
 
                 <!-- Bottom trust badge -->
-                <div class="mt-16 flex justify-center">
+                <div class="mt-8 lg:mt-16 flex justify-center">
                     <div
                         class="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-gray-100 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm text-sm text-gray-500 dark:text-gray-400 shadow-sm">
                         <UIcon name="i-lucide-shield-check" class="w-4 h-4 text-tfd shrink-0" />
@@ -491,15 +494,15 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              PARTNERSHIP OPPORTUNITIES
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="py-20 lg:py-28 bg-gray-50 dark:bg-neutral-900">
+        <section class="py-12 lg:py-20 bg-gray-50 dark:bg-neutral-900">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <p class="text-tfd font-semibold uppercase tracking-widest text-sm mb-3">{{
+                <div class="text-center mb-10 lg:mb-14">
+                    <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.types_eyebrow') }}</p>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                         {{ t('collab.types_title') }}
                     </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <p class="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         {{ t('collab.types_desc') }}
                     </p>
                 </div>
@@ -529,21 +532,22 @@ const budgetOptions = computed(() => [
              WHY BRANDS CHOOSE TFDEVS
              ═══════════════════════════════════════════════════════════════════ -->
         <section
-            class="py-20 lg:py-28 bg-linear-to-br from-gray-900 via-neutral-900 to-tfd/20 dark:from-neutral-950 dark:via-neutral-900 dark:to-tfd/10 text-white">
+            class="py-12 lg:py-20 bg-linear-to-br from-gray-900 via-neutral-900 to-tfd/20 dark:from-neutral-950 dark:via-neutral-900 dark:to-tfd/10 text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <p class="text-yellow-400 font-semibold uppercase tracking-widest text-sm mb-3">{{
+                <div class="text-center mb-10 lg:mb-14">
+                    <p class="text-yellow-400 font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.cred_eyebrow') }}</p>
-                    <h2 class="text-3xl sm:text-4xl font-bold mb-4">{{ t('collab.cred_title') }}</h2>
-                    <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">{{ t('collab.cred_title') }}</h2>
+                    <p class="text-base text-gray-300 max-w-2xl mx-auto">
                         {{ t('collab.cred_desc') }}
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div v-for="point in credibilityPoints" :key="point.title"
-                        class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-7 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-xl bg-yellow-400/15 flex items-center justify-center mb-5">
+                        class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 sm:p-7 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                        <div
+                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-yellow-400/15 flex items-center justify-center mb-4">
                             <UIcon :name="point.icon" class="w-6 h-6 text-yellow-400" />
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">{{ point.title }}</h3>
@@ -556,21 +560,21 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              AUDIENCE PROFILE
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="py-20 lg:py-28 bg-white dark:bg-neutral-950">
+        <section class="py-12 lg:py-20 bg-white dark:bg-neutral-950">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <p class="text-tfd font-semibold uppercase tracking-widest text-sm mb-3">{{
+                <div class="text-center mb-10 lg:mb-14">
+                    <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.audience_eyebrow') }}</p>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                         {{ t('collab.audience_title') }}
                     </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <p class="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         {{ t('collab.audience_desc') }}
                     </p>
                 </div>
 
                 <!-- Segments grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-16">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-10 lg:mb-14">
                     <div v-for="seg in audienceSegments" :key="seg.label"
                         class="bg-gray-50 dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl p-5 text-center hover:border-tfd/40 hover:shadow-md transition-all">
                         <div
@@ -647,22 +651,23 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              FINAL CTA + CONTACT FORM
              ═══════════════════════════════════════════════════════════════════ -->
-        <section id="contact" class="py-20 lg:py-28 bg-white dark:bg-neutral-950">
+        <section id="contact" class="py-12 lg:py-20 bg-white dark:bg-neutral-950">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- CTA header -->
-                <div class="text-center mb-16">
-                    <p class="text-tfd font-semibold uppercase tracking-widest text-sm mb-3">{{ t('collab.cta_eyebrow')
+                <div class="text-center mb-10 lg:mb-14">
+                    <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
+                        t('collab.cta_eyebrow')
                         }}</p>
                     <h2
-                        class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 max-w-3xl mx-auto leading-tight">
+                        class="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 max-w-3xl mx-auto leading-tight">
                         {{ t('collab.cta_title') }}
                     </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    <p class="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         {{ t('collab.cta_desc') }}
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
                     <!-- Contact info sidebar -->
                     <div class="lg:col-span-2 space-y-8">
                         <div>
