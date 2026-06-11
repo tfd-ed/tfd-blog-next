@@ -140,7 +140,7 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
         {
             label: t('home'),
             to: localePath('/'),
-            active: currentPath === '/'
+            active: currentPath === localePath('/')
         },
         // {
         //     label: t('course'),
@@ -150,7 +150,7 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
         {
             label: t('articles'),
             to: localePath('/articles'),
-            active: currentPath.startsWith('/articles')
+            active: currentPath.startsWith(localePath('/articles'))
         },
         // {
         //     label: t('projects'),
@@ -174,9 +174,14 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
         //     active: currentPath.startsWith('/services')
         // },
         {
+            label: t('collaborate'),
+            to: localePath('/collaborate'),
+            active: currentPath.startsWith(localePath('/collaborate'))
+        },
+        {
             label: t('about_us'),
             to: localePath('/about-us'),
-            active: currentPath.startsWith('/about-us')
+            active: currentPath.startsWith(localePath('/about-us'))
         }
     ]
 })

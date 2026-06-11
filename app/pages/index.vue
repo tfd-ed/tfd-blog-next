@@ -11,6 +11,11 @@
     <!-- Latest Articles + Videos -->
     <LatestFeed :videos="latestVideos" channel-link="https://www.youtube.com/@tfdevs" />
 
+    <!-- Collaborate CTA Banner -->
+    <div class="container mx-auto px-4 py-2 max-w-7xl">
+        <CollaborateBanner />
+    </div>
+
     <!-- Connect With Us Component -->
 
 
