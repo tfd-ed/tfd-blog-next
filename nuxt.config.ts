@@ -17,8 +17,16 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/fonts',
     'nuxt-og-image',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxtjs/plausible'
   ],
+  plausible: {
+    autoOutboundTracking: true,
+    fileDownloads: true,
+    formSubmissions: true,
+    // Prevent tracking on localhost
+    ignoredHostnames: ['localhost'],
+  },
   content: {
     build: {
       markdown: {
