@@ -7,8 +7,8 @@ WORKDIR /app
 # Install build tools for native modules (better-sqlite3)
 RUN apk add --no-cache python3 make g++
 
-# Enable pnpm
-RUN npm install -g pnpm@9.3.0
+# Enable corepack (built into Node.js 16.9+) to use pnpm from package.json
+RUN corepack enable
 
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
@@ -20,8 +20,8 @@ RUN pnpm install --frozen-lockfile
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Enable pnpm
-RUN npm install -g pnpm@9.3.0
+# Enable corepack for pnpm
+RUN corepack enable
 
 # Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
