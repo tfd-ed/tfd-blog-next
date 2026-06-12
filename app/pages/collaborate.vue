@@ -321,7 +321,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.why_eyebrow')
-                        }}</p>
+                    }}</p>
                     <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                         {{ t('collab.why_title') }}
                     </h2>
@@ -485,7 +485,7 @@ const budgetOptions = computed(() => [
                         <!-- Logo -->
                         <div class="relative w-full h-14 sm:h-20 flex items-center justify-center">
                             <img :src="collab.logo" :alt="collab.name"
-                                class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-sm" />
+                                class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                         </div>
                         <!-- Name -->
                         <span
@@ -676,7 +676,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.cta_eyebrow')
-                        }}</p>
+                    }}</p>
                     <h2
                         class="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 max-w-3xl mx-auto leading-tight">
                         {{ t('collab.cta_title') }}
