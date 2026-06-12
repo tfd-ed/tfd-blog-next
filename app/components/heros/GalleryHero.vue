@@ -1,5 +1,5 @@
 <template>
-    <section class="relative overflow-hidden h-130 md:h-150 flex items-center">
+    <section class="relative overflow-hidden h-130 md:h-150 flex items-center w-full">
         <!-- ── Mosaic Background ─────────────────────────────────── -->
         <!--
             mask-image fades only this background layer into the page background (white / neutral-900)

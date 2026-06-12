@@ -1,5 +1,5 @@
 <template>
-  <UApp>
+  <UApp class="overflow-x-hidden w-full">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

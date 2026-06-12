@@ -1,30 +1,32 @@
 <template>
-    <!-- <IntroValue /> -->
-    <GalleryHero :title="$t('heros.bring_tech_to_everyone')" :description="$t('heros.success_definition')"
-        :author="$t('heros.chau_dara')" :authorTitle="$t('heros.founder')" :showCTA="true" :images="images"
-        :subscriber-count="44" channel-link="https://www.youtube.com/@tfdevs" />
+    <div class="overflow-x-hidden w-full">
+        <!-- <IntroValue /> -->
+        <GalleryHero :title="$t('heros.bring_tech_to_everyone')" :description="$t('heros.success_definition')"
+            :author="$t('heros.chau_dara')" :authorTitle="$t('heros.founder')" :showCTA="true" :images="images"
+            :subscriber-count="44" channel-link="https://www.youtube.com/@tfdevs" />
 
-    <div class="container mx-auto px-4">
-        <ConnectWithUs :socialLinks="socialLinks" />
+        <div class="container mx-auto px-4">
+            <ConnectWithUs :socialLinks="socialLinks" />
+        </div>
+
+        <!-- Latest Articles + Videos -->
+        <LatestFeed :videos="latestVideos" channel-link="https://www.youtube.com/@tfdevs" />
+
+        <!-- Collaborate CTA Banner -->
+        <div class="container mx-auto px-4 py-2 max-w-7xl">
+            <CollaborateBanner />
+        </div>
+
+        <!-- Connect With Us Component -->
+
+
+
+        <!-- <Client />
+        <Testimonial />
+        <PlatformInfo />
+        <Approach />
+        <ReachUs /> -->
     </div>
-
-    <!-- Latest Articles + Videos -->
-    <LatestFeed :videos="latestVideos" channel-link="https://www.youtube.com/@tfdevs" />
-
-    <!-- Collaborate CTA Banner -->
-    <div class="container mx-auto px-4 py-2 max-w-7xl">
-        <CollaborateBanner />
-    </div>
-
-    <!-- Connect With Us Component -->
-
-
-
-    <!-- <Client />
-    <Testimonial />
-    <PlatformInfo />
-    <Approach />
-    <ReachUs /> -->
 </template>
 <script setup lang="ts">
 const { data: latestVideos } = await useFetch('/api/youtube-videos', {
