@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     formSubmissions: true,
     // Prevent tracking on localhost
     ignoredHostnames: ['localhost'],
+    apiHost: 'https://plausible.tfdevs.com',
   },
   content: {
     build: {
