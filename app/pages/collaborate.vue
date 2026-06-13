@@ -164,6 +164,7 @@ const audienceSegments = computed(() => [
 
 // ─── Past collaborators ───────────────────────────────────────────────────────
 const collaborators = [
+    { name: 'Hostinger', logo: '/images/collabs/hostinger.png', url: 'https://www.hostinger.com' },
     { name: 'AIESEC in Cambodia', logo: '/images/collabs/aiesec.png', url: 'https://web.facebook.com/share/p/1EmYB78zEQ' },
     { name: 'Cryptomus', logo: '/images/collabs/cryptomus.png', url: 'https://youtu.be/6erO0E8m8Cc?si=F0l1c67mVlEfdf1N' },
     { name: 'GeeTest', logo: '/images/collabs/geetest.png', url: 'https://youtu.be/hKZncFPSXrw?si=shos3ySRZVrVDecw' },
