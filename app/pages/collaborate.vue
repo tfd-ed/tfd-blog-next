@@ -72,6 +72,15 @@ const platforms = [
         link: 'https://www.tiktok.com/@chaudarakh',
         animated: ref(0),
     },
+    {
+        name: 'Telegram Channel',
+        label: 'Subscribers',
+        target: 4500,
+        suffix: '',
+        color: '#24a2de',
+        link: 'https://t.me/tfdTech',
+        animated: ref(0),
+    },
 ]
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
@@ -96,6 +105,7 @@ const formatCount = (n: number) => {
 const ytPlatform = platforms[0]!
 const fbPlatform = platforms[1]!
 const ttPlatform = platforms[2]!
+const telegramPlatform = platforms[3]!
 
 useIntersectionObserver(
     statsSection,
@@ -164,7 +174,7 @@ const audienceSegments = computed(() => [
 
 // ─── Past collaborators ───────────────────────────────────────────────────────
 const collaborators = [
-    { name: 'Hostinger', logo: '/images/collabs/hostinger.png', url: 'https://www.hostinger.com' },
+    { name: 'Hostinger', logo: '/images/collabs/hostinger.png', url: 'https://web.facebook.com/share/v/1Yh8LR7Wtn' },
     { name: 'AIESEC in Cambodia', logo: '/images/collabs/aiesec.png', url: 'https://web.facebook.com/share/p/1EmYB78zEQ' },
     { name: 'Cryptomus', logo: '/images/collabs/cryptomus.png', url: 'https://youtu.be/6erO0E8m8Cc?si=F0l1c67mVlEfdf1N' },
     { name: 'GeeTest', logo: '/images/collabs/geetest.png', url: 'https://youtu.be/hKZncFPSXrw?si=shos3ySRZVrVDecw' },
@@ -375,7 +385,7 @@ const budgetOptions = computed(() => [
                             </svg>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="font-semibold text-gray-900 dark:text-white">YouTube</div>
+                            <div class="font-semibold text-gray-900 dark:text-white">{{ ytPlatform.name }}</div>
                             <div class="text-sm text-gray-500 dark:text-gray-400">{{ t('collab.yt_subscribers') }}</div>
                         </div>
                         <div class="text-right shrink-0">
@@ -397,7 +407,7 @@ const budgetOptions = computed(() => [
                             </svg>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="font-semibold text-gray-900 dark:text-white">Facebook</div>
+                            <div class="font-semibold text-gray-900 dark:text-white">{{ fbPlatform.name }}</div>
                             <div class="text-sm text-gray-500 dark:text-gray-400">{{ t('collab.fb_followers') }}</div>
                         </div>
                         <div class="text-right shrink-0">
@@ -422,12 +432,49 @@ const budgetOptions = computed(() => [
                             </svg>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <div class="font-semibold text-gray-900 dark:text-white">TikTok</div>
+                            <div class="font-semibold text-gray-900 dark:text-white">{{ ttPlatform.name }}</div>
                             <div class="text-sm text-gray-500 dark:text-gray-400">{{ t('collab.tt_followers') }}</div>
                         </div>
                         <div class="text-right shrink-0">
                             <div class="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white tabular-nums">{{
                                 formatCount(ttPlatform.animated.value) }}</div>
+                        </div>
+                        <UIcon name="i-lucide-arrow-up-right"
+                            class="w-5 h-5 text-gray-300 dark:text-gray-600 group-hover:text-gray-500 shrink-0 transition-colors" />
+                    </a>
+                    <!-- Telegram -->
+                    <a :href="telegramPlatform.link" target="_blank" rel="noopener noreferrer"
+                        class="flex items-center gap-4 bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-2xl px-4 sm:px-8 py-4 sm:py-6 hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 group">
+                        <div class="shrink-0 w-12 h-12 flex items-center justify-center">
+                            <!-- Telegram Logo -->
+                            <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 240 240">
+                                <defs>
+                                    <linearGradient id="linear-gradient" x1="120" y1="240" x2="120"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop offset="0" stop-color="#1d93d2" />
+                                        <stop offset="1" stop-color="#38b0e3" />
+                                    </linearGradient>
+                                </defs>
+                                <title>Telegram_logo</title>
+                                <circle cx="120" cy="120" r="120" fill="url(#linear-gradient)" />
+                                <path
+                                    d="M81.229,128.772l14.237,39.406s1.78,3.687,3.686,3.687,30.255-29.492,30.255-29.492l31.525-60.89L81.737,118.6Z"
+                                    fill="#c8daea" />
+                                <path d="M100.106,138.878l-2.733,29.046s-1.144,8.9,7.754,0,17.415-15.763,17.415-15.763"
+                                    fill="#a9c6d8" />
+                                <path
+                                    d="M81.486,130.178,52.2,120.636s-3.5-1.42-2.373-4.64c.232-.664.7-1.229,2.1-2.2,6.489-4.523,120.106-45.36,120.106-45.36s3.208-1.081,5.1-.362a2.766,2.766,0,0,1,1.885,2.055,9.357,9.357,0,0,1,.254,2.585c-.009.752-.1,1.449-.169,2.542-.692,11.165-21.4,94.493-21.4,94.493s-1.239,4.876-5.678,5.043A8.13,8.13,0,0,1,146.1,172.5c-8.711-7.493-38.819-27.727-45.472-32.177a1.27,1.27,0,0,1-.546-.9c-.093-.469.417-1.05.417-1.05s52.426-46.6,53.821-51.492c.108-.379-.3-.566-.848-.4-3.482,1.281-63.844,39.4-70.506,43.607A3.21,3.21,0,0,1,81.486,130.178Z"
+                                    fill="#fff" />
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="font-semibold text-gray-900 dark:text-white">{{ telegramPlatform.name }}</div>
+                            <div class="text-sm text-gray-500 dark:text-gray-400">{{ t('collab.yt_subscribers') }}</div>
+                        </div>
+                        <div class="text-right shrink-0">
+                            <div class="text-2xl sm:text-4xl font-bold text-[#24a2de] dark:text-white tabular-nums">{{
+                                formatCount(telegramPlatform.animated.value) }}</div>
                         </div>
                         <UIcon name="i-lucide-arrow-up-right"
                             class="w-5 h-5 text-gray-300 dark:text-gray-600 group-hover:text-gray-500 shrink-0 transition-colors" />
