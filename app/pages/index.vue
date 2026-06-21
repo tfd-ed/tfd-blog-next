@@ -1,5 +1,5 @@
 <template>
-    <div class="overflow-x-hidden w-full">
+    <div>
         <!-- <IntroValue /> -->
         <GalleryHero :title="$t('heros.bring_tech_to_everyone')" :description="$t('heros.success_definition')"
             :author="$t('heros.chau_dara')" :authorTitle="$t('heros.founder')" :showCTA="true" :images="images"

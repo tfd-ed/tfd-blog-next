@@ -50,7 +50,7 @@
 
             <!-- Hover view - detailed information -->
             <div
-                class="absolute inset-0 p-6 sm:p-8 opacity-0 transition-opacity duration-300 group-hover:relative group-hover:opacity-100 flex flex-col justify-between overflow-y-auto">
+                class="absolute inset-0 p-6 sm:p-8 opacity-0 transition-opacity duration-300 group-hover:relative group-hover:opacity-100 flex flex-col justify-between">
                 <div>
                     <!-- Title on hover -->
                     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3">

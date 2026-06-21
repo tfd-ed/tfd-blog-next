@@ -37,7 +37,7 @@
 
             <!-- Hover view - detailed information -->
             <div :class="[
-                'absolute inset-0 p-6 sm:p-8 opacity-0 transition-opacity duration-300 overflow-y-auto',
+                'absolute inset-0 p-6 sm:p-8 opacity-0 transition-opacity duration-300',
                 'group-hover:relative group-hover:opacity-100',
                 'flex flex-col justify-between'
             ]">

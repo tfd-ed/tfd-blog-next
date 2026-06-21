@@ -85,15 +85,22 @@ const platforms = [
 
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
 
+// Track animation frame IDs for cleanup
+const animationFrameIds = ref<number[]>([])
+
 const animateValue = (animatedRef: Ref<number>, target: number) => {
     const duration = 2000
     const startTime = performance.now()
     const tick = (now: number) => {
         const progress = Math.min((now - startTime) / duration, 1)
         animatedRef.value = Math.round(target * easeOutCubic(progress))
-        if (progress < 1) requestAnimationFrame(tick)
+        if (progress < 1) {
+            const frameId = requestAnimationFrame(tick)
+            animationFrameIds.value.push(frameId)
+        }
     }
-    requestAnimationFrame(tick)
+    const frameId = requestAnimationFrame(tick)
+    animationFrameIds.value.push(frameId)
 }
 
 const formatCount = (n: number) => {
@@ -128,6 +135,12 @@ onMounted(() => {
             }
         }
     }, 100)
+})
+
+// Cleanup animation frames on unmount to prevent iOS Safari/webview issues
+onBeforeUnmount(() => {
+    animationFrameIds.value.forEach(id => cancelAnimationFrame(id))
+    animationFrameIds.value = []
 })
 
 // ─── Why partner reasons ──────────────────────────────────────────────────────
@@ -332,7 +345,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.why_eyebrow')
-                    }}</p>
+                        }}</p>
                     <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                         {{ t('collab.why_title') }}
                     </h2>
@@ -724,7 +737,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.cta_eyebrow')
-                    }}</p>
+                        }}</p>
                     <h2
                         class="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 max-w-3xl mx-auto leading-tight">
                         {{ t('collab.cta_title') }}

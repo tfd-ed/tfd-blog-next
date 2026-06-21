@@ -1,5 +1,5 @@
 <template>
-    <header class="sticky top-4 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full">
+    <header class="sticky top-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full py-2">
         <nav class="relative max-w-[66rem] w-full bg-white/90 backdrop-blur-md dark:bg-gray-900/90 border border-gray-200/50 dark:border-gray-700/50 rounded-[8px] py-3 ps-3 pe-2 md:ps-5 md:flex md:items-center md:justify-between md:py-0 mx-2 lg:mx-auto shadow-lg transition-colors duration-300"
             aria-label="Global">
             <div class="flex items-center justify-between">
@@ -138,7 +138,7 @@
                         </div>
                         <div class="flex items-center justify-between px-4">
                             <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ t('language')
-                                }}</span>
+                            }}</span>
                             <language-switcher />
                         </div>
                     </div>
