@@ -155,10 +155,11 @@ mjx-container {
 .prose p {
   color: var(--color-text-secondary);
   margin-bottom: 1.25rem;
-  line-height: 1.75;
+  line-height: 1.85;
   font-size: 0.9375rem;
   text-align: justify;
   hyphens: auto;
+  word-spacing: 0.05em;
 }
 
 @media (min-width: 640px) {

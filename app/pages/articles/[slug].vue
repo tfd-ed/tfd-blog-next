@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto px-4 py-12 max-w-4xl">
+    <div class="container mx-auto px-6 sm:px-8 md:px-12 py-12 max-w-4xl">
         <!-- Back Button -->
         <NuxtLink to="/articles"
             class="inline-flex items-center gap-2 text-tfd hover:text-tfd/80 font-medium mb-8 transition-colors">
