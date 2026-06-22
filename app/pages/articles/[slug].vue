@@ -64,10 +64,9 @@
 
             <!-- Featured Image -->
             <div v-if="article.image" class="not-prose mb-8">
-                <div
-                    class="w-full max-w-2xl mx-auto overflow-hidden rounded-xl shadow-md border border-gray-100 dark:border-gray-800">
+                <div class="w-full max-w-3xl mx-auto rounded-xl bg-white dark:bg-gray-900">
                     <NuxtImg :src="article.image" :alt="article.title" provider="cloudflare"
-                        class="w-full aspect-video object-cover" />
+                        class="w-full h-auto max-h-[500px] object-contain rounded-xl" />
                 </div>
             </div>
 

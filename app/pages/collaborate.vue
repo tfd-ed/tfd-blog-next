@@ -237,7 +237,7 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              HERO
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="relative py-12 transition-colors duration-300 overflow-hidden">
+        <section id="hero" class="relative py-12 transition-colors duration-300 overflow-hidden">
             <!-- Background layer — mask applied here, never touches content -->
             <div class="absolute inset-0 pointer-events-none"
                 style="mask-image: radial-gradient(ellipse 90% 85% at 50% 50%, black 30%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 50%, black 30%, transparent 75%);">
@@ -340,12 +340,12 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              WHY PARTNER
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="py-12 lg:py-20 bg-white dark:bg-neutral-950">
+        <section id="why-partner" class="py-12 lg:py-20 bg-white dark:bg-neutral-950">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.why_eyebrow')
-                        }}</p>
+                    }}</p>
                     <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                         {{ t('collab.why_title') }}
                     </h2>
@@ -372,7 +372,7 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              SOCIAL MEDIA REACH
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="py-12 lg:py-20 bg-gray-50 dark:bg-neutral-900">
+        <section id="reach" class="py-12 lg:py-20 bg-gray-50 dark:bg-neutral-900">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
@@ -503,7 +503,7 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              PREVIOUS COLLABORATIONS
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="relative py-12 lg:py-24 overflow-hidden bg-white">
+        <section id="partners" class="relative py-12 lg:py-24 overflow-hidden bg-white">
             <!-- Blur gradient orbs -->
             <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
                 <div class="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-tfd/8 blur-[120px]">
@@ -574,7 +574,7 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              PARTNERSHIP OPPORTUNITIES
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="py-12 lg:py-20 bg-gray-50 dark:bg-neutral-900">
+        <section id="opportunities" class="py-12 lg:py-20 bg-gray-50 dark:bg-neutral-900">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
@@ -611,7 +611,7 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              WHY BRANDS CHOOSE TFDEVS
              ═══════════════════════════════════════════════════════════════════ -->
-        <section
+        <section id="credibility"
             class="py-12 lg:py-20 bg-linear-to-br from-gray-900 via-neutral-900 to-tfd/20 dark:from-neutral-950 dark:via-neutral-900 dark:to-tfd/10 text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10 lg:mb-14">
@@ -640,7 +640,7 @@ const budgetOptions = computed(() => [
         <!-- ═══════════════════════════════════════════════════════════════════
              AUDIENCE PROFILE
              ═══════════════════════════════════════════════════════════════════ -->
-        <section class="py-12 lg:py-20 bg-white dark:bg-neutral-950">
+        <section id="audience" class="py-12 lg:py-20 bg-white dark:bg-neutral-950">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
@@ -737,7 +737,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.cta_eyebrow')
-                        }}</p>
+                    }}</p>
                     <h2
                         class="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 max-w-3xl mx-auto leading-tight">
                         {{ t('collab.cta_title') }}

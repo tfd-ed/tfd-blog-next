@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-white dark:bg-neutral-900 min-h-screen flex flex-col transition-colors duration-300">
+    <div class="bg-white dark:bg-neutral-900 min-h-screen transition-colors duration-300">
         <FlexHeader />
-        <main class="flex-1 relative w-full">
+        <main class="w-full">
             <slot />
         </main>
         <FlexFooter />

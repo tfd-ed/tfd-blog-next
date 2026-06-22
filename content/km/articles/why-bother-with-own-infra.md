@@ -1,0 +1,17 @@
+---
+title: "សម័យនេះគេនិយម Vercel ហេតុអ្វីខ្ញុំចាំបាច់ឈឺក្បាលជាមួយ Infra ខ្លួនឯងធ្វើអី?"
+description: ស្វែងយល់ពីហេតុអ្វីខ្ញុំចាំបាច់ឈឺក្បាលជាមួយ Infra ខ្លួនឯងធ្វើអី ជំនួសឱ្យប្រើ Vercel ដែលងាយស្រួលប្រើ និងមានសេវាកម្មគាំទ្រដ៏ល្អ។
+date: 2026-06-22
+image: /images/articles/why-bother-with-own-infra/homelab.png
+tags: ['DevOps', 'Infrastructure', 'Deployment']
+author: ចៅ ដារ៉ា
+readTime: 3 minutes
+published: true
+---
+
+មានអ្នកសួរខ្ញុំថា ហេតុអ្វីបានជាខ្ញុំសុខចិត្តចំណាយពេល Deploy website TFDevs តាមរយៈ Cloudflare, Cloudflare Tunnel, Nginx gateway VM, និង K3s Kubernetes cluster ជំនួសឱ្យការគ្រាន់តែចុច "Deploy" មួយឃ្លីកលើ Vercel ឱ្យចប់រឿងទៅ?
+ការពិតទៅ Vercel គឺជា platform ដ៏អស្ចារ្យមួយ បើគោលដៅរបស់ខ្ញុំគ្រាន់តែចង់ឱ្យ website នេះ online បានលឿនបំផុត ខ្ញុំប្រើវាបាត់ហើយ។ ប៉ុន្តែសម្រាប់ខ្ញុំ គោលដៅគឺធំជាងការគ្រាន់តែ Hosting ធម្មតា។ ក្នុងនាមជា Software Engineer, Instructor, និង Content Creator ខ្ញុំចង់យល់ឱ្យច្បាស់ពីបច្ចេកវិទ្យាដែលនៅពីក្រោយ (beneath the surface) នៃ Web applications សម័យថ្មី។ Managed platforms ភាគច្រើនតែងតែលាក់បាំងភាពស្មុគស្មាញនៃ Networking, Reverse proxies, Load balancing, Container orchestration, Monitoring, Scaling និង Security។ ការសាងសង់ និងគ្រប់គ្រង Infrastructure ដោយខ្លួនឯង ជួយឱ្យខ្ញុំទទួលបានបទពិសោធន៍ផ្ទាល់ (Hands-on) និងយល់កាន់តែស៊ីជម្រៅពីរបៀបដែល System ដំណើរការក្នុង Production ពិតប្រាកដ។
+
+ខ្ញុំយល់ថា វាមានហានិភ័យសម្រាប់សិស្សដែលពឹងផ្អែកទាំងស្រុងលើ Platform ដូចជា Vercel, Netlify ឬ Managed services ផ្សេងៗ។ Platform ទាំងនេះជា Tool ដ៏ល្អសម្រាប់បង្កើន Productivity ក៏ពិតមែន ប៉ុន្តែវាក៏អាចបង្កើតជា "រូបភាពបំភាន់" (Illusion) ថា Web application គឺជាអ្វីមួយដែលគ្រាន់តែ Push ចូល Git រួចវាក៏ក្លាយជា Website ដោយមន្តអាគម។ Magic នៅពេលដែលមានបញ្ហាកើតឡើង មិនថាជាបញ្ហា Networking, Performance bottlenecks, Scaling, SSL configuration, Reverse proxy errors ឬ Infrastructure outages នោះទេ Developer ជាច្រើននឹងពិបាកយល់ថាមានអ្វីកើតឡើងនៅពីក្រោយឆាក។ ជាលទ្ធផល ពួកគេនឹងក្លាយជាអ្នកដែលអាស្រ័យខ្លាំងលើ Platform ណាមួយ (Platform dependent) និងជួបការលំបាកនៅពេលត្រូវ Deploy application ក្នុង Environment ដែលមិនមាន Abstractions ស្រាប់ៗឱ្យប្រើបែបនេះ។
+
+ការដើរលើផ្លូវ Infrastructure ខ្លួនឯងនេះ ជួយឱ្យខ្ញុំរៀនមិនត្រឹមតែពីរបៀប Build application ប៉ុណ្ណោះទេ ប៉ុន្តែថែមទាំងរបៀប Operate វាទៀតផង។ រាល់ Component នីមួយៗក្នុង Stack នេះ បង្រៀនខ្ញុំនូវមេរៀនមានតម្លៃជាច្រើន តាំងពី Kubernetes, Ingress controllers រហូតដល់ Observability, Networking និងការ Troubleshooting distributed systems។ Homelab នេះក៏ជា "កន្លែងលេង" សម្រាប់ខ្ញុំសាកល្បង Technology ថ្មីៗ, Host project ផ្សេងៗ និងបង្ហាញពី Concept នៃ Real-world infrastructure ទៅកាន់សិស្សរបស់ខ្ញុំ។ ទោះបីជាវិធីនេះត្រូវការការ Maintenance និងកម្លាំងច្រើនជាង Managed platform ក៏ដោយ ប៉ុន្តែចំណេះដឹងដែលទទួលបានគឺមានតម្លៃជាងភាពងាយស្រួលឆ្ងាយណាស់។ Website គ្រាន់តែជា Application មួយដែលរត់លើ Infrastructure នេះប៉ុណ្ណោះ តែ Project ពិតប្រាកដរបស់ខ្ញុំ គឺការរៀន ការសាកល្បង និងការអភិវឌ្ឍជំនាញ Engineering ដើម្បីគ្រប់គ្រង Modern systems ប្រកបដោយទំនុកចិត្ត។

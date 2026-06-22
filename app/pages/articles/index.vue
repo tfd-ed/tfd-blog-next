@@ -1,104 +1,82 @@
 <template>
-    <div class="container mx-auto px-4 py-12 max-w-7xl">
-        <!-- Page Header -->
-        <div class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                {{ $t('articles') }}
+    <div class="container mx-auto px-6 py-16 max-w-4xl">
+        <!-- Page Header - Minimalist -->
+        <header class="mb-12 pb-8 border-b border-gray-300 dark:border-gray-700">
+            <h1 class="text-3xl  font-normal text-gray-900 dark:text-gray-100 mb-2">
+                {{ t('articles') }}
             </h1>
-            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                {{ $t('articles_page_description') }}
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+                {{ t('articles_description') }}
             </p>
+        </header>
+
+        <!-- Simple Search -->
+        <div v-if="articles && articles.length > 10" class="mb-8">
+            <input v-model="searchQuery" type="text" :placeholder="t('search_articles')"
+                class="w-full max-w-md px-3 py-2 text-sm border border-gray-300 dark:border-gray-700 bg-transparent text-gray-900 dark:text-gray-100 focus:outline-none focus:border-gray-500 dark:focus:border-gray-500" />
         </div>
 
-        <!-- Search and Filter Section -->
-        <div class="mb-8 space-y-4">
-            <!-- Search Bar -->
-            <div class="relative max-w-2xl mx-auto">
-                <input v-model="searchQuery" type="text" :placeholder="$t('search_articles_placeholder')"
-                    class="w-full px-5 py-3 pl-12 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-neutral-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-tfd dark:focus:border-tfd transition-colors" />
-                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-            </div>
+        <!-- Articles List - Clean Table Style -->
+        <div v-if="displayedArticles.length > 0" class="space-y-6">
+            <article v-for="article in displayedArticles" :key="article.path"
+                class="border-b border-gray-200 dark:border-gray-800 pb-6 last:border-0">
+                <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
+                    <!-- Date Column -->
+                    <time v-if="article.date" class="text-sm text-gray-500 dark:text-gray-500  whitespace-nowrap"
+                        :datetime="article.date">
+                        {{ formatDateSimple(article.date) }}
+                    </time>
 
-            <!-- Filter by Date -->
-            <div class="flex flex-wrap justify-center gap-4">
-                <button v-for="filter in dateFilters" :key="filter.value" @click="selectedDateFilter = filter.value"
-                    :class="[
-                        'px-4 py-2 rounded-lg font-medium transition-all duration-200',
-                        selectedDateFilter === filter.value
-                            ? 'bg-tfd text-white shadow-md'
-                            : 'bg-gray-200 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-neutral-600'
-                    ]">
-                    {{ filter.label }}
-                </button>
-            </div>
+                    <!-- Content Column -->
+                    <div class="flex-1 min-w-0">
+                        <NuxtLink :to="`/articles/${getArticleSlug(article.path)}`"
+                            class="text-lg text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-transparent hover:decoration-current transition-colors">
+                            {{ article.title }}
+                        </NuxtLink>
 
-            <!-- Results Count -->
-            <div class="text-center text-sm text-gray-600 dark:text-gray-400">
-                {{ $t('showing_articles', { displayed: displayedArticles.length, total: filteredArticles.length }) }}
-            </div>
+                        <!-- Description (Optional) -->
+                        <p v-if="article.description"
+                            class="mt-1 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                            {{ article.description }}
+                        </p>
+
+                        <!-- Tags (Minimal) -->
+                        <div v-if="article.tags && article.tags.length > 0" class="mt-2 flex flex-wrap gap-2">
+                            <span v-for="tag in article.tags.slice(0, 5)" :key="tag"
+                                class="text-xs text-gray-500 dark:text-gray-500">
+                                {{ tag }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </article>
         </div>
 
-        <!-- Articles Grid -->
-        <div v-if="displayedArticles.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            <ArticleCard v-for="article in displayedArticles" :key="article.path" :slug="getArticleSlug(article.path)"
-                :title="article.title" :description="article.description" :date="article.date" :image="article.image"
-                :tags="article.tags" :author="article.author" :readTime="article.readTime" />
+        <!-- No Results -->
+        <div v-else class="py-12 text-center">
+            <p class="text-gray-500 dark:text-gray-500">{{ t('no_articles_found') }}</p>
         </div>
 
-        <!-- No Results Message -->
-        <div v-else class="text-center py-12">
-            <svg class="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">{{ $t('no_articles_found') }}</h3>
-            <p class="text-gray-500 dark:text-gray-400">{{ $t('adjust_search_filters') }}</p>
-        </div>
-
-        <!-- Load More Button -->
-        <div v-if="hasMore" class="mt-12 text-center">
+        <!-- Load More - Simple -->
+        <div v-if="hasMore" class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
             <button @click="loadMore"
-                class="px-8 py-3 bg-tfd text-white font-semibold rounded-lg hover:bg-tfd/90 transition-all duration-200 hover:shadow-lg">
-                {{ $t('load_more_articles') }}
+                class="text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 underline">
+                {{ t('load_more') }} →
             </button>
         </div>
-
-        <!-- Scroll to Top Button -->
-        <button v-if="showScrollTop" @click="scrollToTop"
-            class="fixed bottom-8 right-8 p-3 bg-tfd text-white rounded-full shadow-lg hover:bg-tfd/90 transition-all duration-200 z-50">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
-        </button>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import type { Collections } from '@nuxt/content'
 
 const { locale, t } = useI18n()
 
 // Reactive state
 const searchQuery = ref('')
-const selectedDateFilter = ref('all')
-const articlesPerPage = 5
+const articlesPerPage = 50
 const currentPage = ref(1)
-const showScrollTop = ref(false)
-
-// Date filter options
-const dateFilters = computed(() => [
-    { label: t('filter_all_time'), value: 'all' },
-    { label: t('filter_last_week'), value: 'week' },
-    { label: t('filter_last_month'), value: 'month' },
-    { label: t('filter_last_3_months'), value: '3months' },
-    { label: t('filter_last_year'), value: 'year' }
-])
 
 // Fetch articles based on locale
 const { data: articles } = await useAsyncData(
@@ -122,7 +100,7 @@ const { data: articles } = await useAsyncData(
     }
 )
 
-// Computed: Filtered articles based on search and date filter
+// Computed: Filtered articles based on search
 const filteredArticles = computed(() => {
     if (!articles.value) return []
 
@@ -135,49 +113,10 @@ const filteredArticles = computed(() => {
             return (
                 article.title?.toLowerCase().includes(query) ||
                 article.description?.toLowerCase().includes(query) ||
-                article.body?.children?.some((child: any) =>
-                    child.children?.some((c: any) =>
-                        c.value?.toLowerCase().includes(query)
-                    )
-                ) ||
                 article.tags?.some((tag: string) => tag.toLowerCase().includes(query))
             )
         })
     }
-
-    // Apply date filter
-    if (selectedDateFilter.value !== 'all') {
-        const now = new Date()
-        const filterDate = new Date()
-
-        switch (selectedDateFilter.value) {
-            case 'week':
-                filterDate.setDate(now.getDate() - 7)
-                break
-            case 'month':
-                filterDate.setMonth(now.getMonth() - 1)
-                break
-            case '3months':
-                filterDate.setMonth(now.getMonth() - 3)
-                break
-            case 'year':
-                filterDate.setFullYear(now.getFullYear() - 1)
-                break
-        }
-
-        filtered = filtered.filter(article => {
-            if (!article.date) return false
-            const articleDate = new Date(article.date)
-            return articleDate >= filterDate
-        })
-    }
-
-    // Sort by date (newest first)
-    filtered.sort((a, b) => {
-        const dateA = a.date ? new Date(a.date).getTime() : 0
-        const dateB = b.date ? new Date(b.date).getTime() : 0
-        return dateB - dateA
-    })
 
     return filtered
 })
@@ -198,33 +137,20 @@ const getArticleSlug = (path: string | undefined) => {
     return path.split('/').pop() || ''
 }
 
+// Format date in simple format (YYYY-MM-DD)
+const formatDateSimple = (date: string | Date) => {
+    const d = new Date(date)
+    return d.toISOString().split('T')[0]
+}
+
 // Load more articles
 const loadMore = () => {
     currentPage.value++
 }
 
-// Scroll to top
-const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-// Handle scroll for showing scroll-to-top button
-const handleScroll = () => {
-    showScrollTop.value = window.scrollY > 500
-}
-
-// Reset pagination when search or filter changes
-watch([searchQuery, selectedDateFilter], () => {
+// Reset pagination when search changes
+watch(searchQuery, () => {
     currentPage.value = 1
-})
-
-// Lifecycle hooks
-onMounted(() => {
-    window.addEventListener('scroll', handleScroll)
-})
-
-onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll)
 })
 
 defineOgImage('BlogPost', {
@@ -233,15 +159,7 @@ defineOgImage('BlogPost', {
 })
 
 useSeoMeta({
-    title: 'Articles - Teaching For Development',
-    description: 'Explore our latest articles on technology, development, AI, and innovation.',
-    ogTitle: 'Articles - Teaching For Development',
-    ogDescription: 'Explore our latest articles on technology, development, AI, and innovation.',
-    ogType: 'website',
-    ogUrl: 'https://tfdevs.com/articles',
-    ogSiteName: 'Teaching For Development',
-    twitterCard: 'summary_large_image',
-    twitterTitle: 'Articles - Teaching For Development',
-    twitterDescription: 'Explore our latest articles on technology, development, AI, and innovation.',
+    title: 'Articles',
+    description: 'Research notes, technical writing, and thoughts.',
 })
 </script>
