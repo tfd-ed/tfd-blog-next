@@ -345,7 +345,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.why_eyebrow')
-                    }}</p>
+                        }}</p>
                     <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
                         {{ t('collab.why_title') }}
                     </h2>
@@ -460,17 +460,17 @@ const budgetOptions = computed(() => [
                         class="flex items-center gap-4 bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-2xl px-4 sm:px-8 py-4 sm:py-6 hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 group">
                         <div class="shrink-0 w-12 h-12 flex items-center justify-center">
                             <!-- Telegram Logo -->
-                            <svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 240 240">
+                            <svg id="telegram-logo-collab" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 240 240" class="w-10 h-10">
                                 <defs>
-                                    <linearGradient id="linear-gradient" x1="120" y1="240" x2="120"
+                                    <linearGradient id="telegram-gradient-collab" x1="120" y1="240" x2="120" y2="0"
                                         gradientUnits="userSpaceOnUse">
                                         <stop offset="0" stop-color="#1d93d2" />
                                         <stop offset="1" stop-color="#38b0e3" />
                                     </linearGradient>
                                 </defs>
                                 <title>Telegram_logo</title>
-                                <circle cx="120" cy="120" r="120" fill="url(#linear-gradient)" />
+                                <circle cx="120" cy="120" r="120" fill="url(#telegram-gradient-collab)" />
                                 <path
                                     d="M81.229,128.772l14.237,39.406s1.78,3.687,3.686,3.687,30.255-29.492,30.255-29.492l31.525-60.89L81.737,118.6Z"
                                     fill="#c8daea" />
@@ -737,7 +737,7 @@ const budgetOptions = computed(() => [
                 <div class="text-center mb-10 lg:mb-14">
                     <p class="text-tfd font-semibold uppercase tracking-widest text-xs sm:text-sm mb-2">{{
                         t('collab.cta_eyebrow')
-                    }}</p>
+                        }}</p>
                     <h2
                         class="text-2xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 max-w-3xl mx-auto leading-tight">
                         {{ t('collab.cta_title') }}

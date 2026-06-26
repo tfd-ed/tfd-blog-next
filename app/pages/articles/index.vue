@@ -16,40 +16,38 @@
                 class="w-full max-w-md px-3 py-2 text-sm border border-gray-300 dark:border-gray-700 bg-transparent text-gray-900 dark:text-gray-100 focus:outline-none focus:border-gray-500 dark:focus:border-gray-500" />
         </div>
 
-        <!-- Articles List - Clean Table Style -->
-        <div v-if="displayedArticles.length > 0" class="space-y-6">
-            <article v-for="article in displayedArticles" :key="article.path"
-                class="border-b border-gray-200 dark:border-gray-800 pb-6 last:border-0">
-                <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
-                    <!-- Date Column -->
-                    <time v-if="article.date" class="text-sm text-gray-500 dark:text-gray-500  whitespace-nowrap"
-                        :datetime="article.date">
-                        {{ formatDateSimple(article.date) }}
-                    </time>
-
-                    <!-- Content Column -->
-                    <div class="flex-1 min-w-0">
-                        <NuxtLink :to="`/articles/${getArticleSlug(article.path)}`"
-                            class="text-lg text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 underline decoration-transparent hover:decoration-current transition-colors">
-                            {{ article.title }}
-                        </NuxtLink>
-
-                        <!-- Description (Optional) -->
-                        <p v-if="article.description"
-                            class="mt-1 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                            {{ article.description }}
-                        </p>
-
-                        <!-- Tags (Minimal) -->
-                        <div v-if="article.tags && article.tags.length > 0" class="mt-2 flex flex-wrap gap-2">
-                            <span v-for="tag in article.tags.slice(0, 5)" :key="tag"
-                                class="text-xs text-gray-500 dark:text-gray-500">
-                                {{ tag }}
-                            </span>
-                        </div>
+        <!-- Articles List - Card Style (matching home page) -->
+        <div v-if="displayedArticles.length > 0" class="space-y-3">
+            <NuxtLink v-for="article in displayedArticles" :key="article.path"
+                :to="`/articles/${getArticleSlug(article.path)}`"
+                class="group flex gap-4 p-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-neutral-800 hover:border-tfd dark:hover:border-tfd transition-colors duration-200">
+                <!-- Thumbnail -->
+                <div class="shrink-0 w-24 h-18 rounded-lg overflow-hidden bg-gray-100 dark:bg-neutral-700 self-start">
+                    <NuxtImg v-if="article.image" provider="cloudflare" :src="article.image" :alt="article.title"
+                        class="w-full h-full object-cover" loading="lazy" />
+                    <div v-else class="w-full h-full flex items-center justify-center">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
                     </div>
                 </div>
-            </article>
+
+                <!-- Info -->
+                <div class="flex-1 min-w-0">
+                    <h3
+                        class="font-semibold text-gray-900 dark:text-white line-clamp-2 text-sm leading-snug group-hover:text-tfd transition-colors">
+                        {{ article.title }}
+                    </h3>
+                    <p v-if="article.description" class="mt-1 text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+                        {{ article.description }}
+                    </p>
+                    <div class="mt-2 flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
+                        <span v-if="article.date">{{ formatDate(article.date) }}</span>
+                        <span v-if="article.readTime">· {{ article.readTime }}</span>
+                    </div>
+                </div>
+            </NuxtLink>
         </div>
 
         <!-- No Results -->
@@ -137,10 +135,13 @@ const getArticleSlug = (path: string | undefined) => {
     return path.split('/').pop() || ''
 }
 
-// Format date in simple format (YYYY-MM-DD)
-const formatDateSimple = (date: string | Date) => {
-    const d = new Date(date)
-    return d.toISOString().split('T')[0]
+// Format date to match home page style (e.g., "Jan 15, 2024")
+const formatDate = (date: string | Date) => {
+    return new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    })
 }
 
 // Load more articles

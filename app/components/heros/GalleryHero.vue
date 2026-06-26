@@ -141,7 +141,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 interface Image {
@@ -170,17 +170,27 @@ function onImageLoad(src: string) {
 const ytWidget = ref<HTMLElement | null>(null)
 const animatedCount = ref(0)
 const hasAnimated = ref(false)
+const animationFrameId = ref<number | null>(null)
 
 function animateCount(target: number) {
+    // Cancel any existing animation
+    if (animationFrameId.value !== null) {
+        cancelAnimationFrame(animationFrameId.value)
+    }
+
     const duration = 2000
     const start = performance.now()
     const easeOut = (t: number) => 1 - Math.pow(1 - t, 3)
     const tick = (now: number) => {
         const progress = Math.min((now - start) / duration, 1)
         animatedCount.value = Math.round(target * easeOut(progress))
-        if (progress < 1) requestAnimationFrame(tick)
+        if (progress < 1) {
+            animationFrameId.value = requestAnimationFrame(tick)
+        } else {
+            animationFrameId.value = null
+        }
     }
-    requestAnimationFrame(tick)
+    animationFrameId.value = requestAnimationFrame(tick)
 }
 
 useIntersectionObserver(ytWidget, ([entry]) => {
@@ -193,11 +203,15 @@ useIntersectionObserver(ytWidget, ([entry]) => {
 onMounted(() => {
     // Populate tiles client-side only to avoid SSR/hydration mismatch from Math.random()
     if (props.images.length) {
-        const half1a = spreadFill(props.images, HALF)
-        const half1b = spreadFill(props.images, HALF)
+        // Reduce tile count on mobile/webview to prevent memory issues
+        const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
+        const tileCount = isMobile ? 25 : HALF // 50 vs 80 tiles per row on mobile
+
+        const half1a = spreadFill(props.images, tileCount)
+        const half1b = spreadFill(props.images, tileCount)
         row1Tiles.value = [...half1a, ...half1b]
-        const half2a = spreadFill(props.images, HALF)
-        const half2b = spreadFill(props.images, HALF)
+        const half2a = spreadFill(props.images, tileCount)
+        const half2b = spreadFill(props.images, tileCount)
         row2Tiles.value = [...half2a, ...half2b]
     }
 
@@ -288,6 +302,14 @@ const HALF = 40
 type Tile = { image: Image; config: typeof tileConfigs[number] }
 const row1Tiles = ref<Tile[]>([])
 const row2Tiles = ref<Tile[]>([])
+
+// Cleanup animation frame on unmount to prevent memory leaks in iOS Safari/webviews
+onBeforeUnmount(() => {
+    if (animationFrameId.value !== null) {
+        cancelAnimationFrame(animationFrameId.value)
+        animationFrameId.value = null
+    }
+})
 </script>
 
 <style scoped>
@@ -303,6 +325,18 @@ const row2Tiles = ref<Tile[]>([])
 
 .gallery-drift {
     animation: gallery-drift 480s linear infinite;
-    will-change: transform;
+    /* Removed will-change: transform to prevent iOS Safari/webview memory issues
+       with many animated elements. The animation still runs smoothly without it. */
+}
+
+/* Optional: Disable animation on iOS devices and webviews to prevent crashes */
+@supports (-webkit-touch-callout: none) {
+    /* iOS Safari detection */
+    @media (max-width: 768px) {
+        .gallery-drift {
+            animation: gallery-drift 600s linear infinite;
+            /* Slower animation for iOS mobile to reduce memory pressure */
+        }
+    }
 }
 </style>

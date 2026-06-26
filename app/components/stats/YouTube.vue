@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
 // Props
@@ -61,6 +61,7 @@ const target = ref<HTMLElement | null>(null)
 // Reactive state for animation
 const animatedCount = ref<number>(0)
 const hasAnimated = ref(false)
+const animationFrameId = ref<number | null>(null)
 
 // Custom easing function - easeOutCubic
 const easeOutCubic = (t: number): number => {
@@ -69,6 +70,11 @@ const easeOutCubic = (t: number): number => {
 
 // Function to animate the count
 const animateCount = (targetValue: number) => {
+    // Cancel any existing animation
+    if (animationFrameId.value !== null) {
+        cancelAnimationFrame(animationFrameId.value)
+    }
+
     const duration = 2000
     const startValue = 0
     const startTime = performance.now()
@@ -81,11 +87,13 @@ const animateCount = (targetValue: number) => {
         animatedCount.value = Math.round(startValue + (targetValue - startValue) * easedProgress)
 
         if (progress < 1) {
-            requestAnimationFrame(animate)
+            animationFrameId.value = requestAnimationFrame(animate)
+        } else {
+            animationFrameId.value = null
         }
     }
 
-    requestAnimationFrame(animate)
+    animationFrameId.value = requestAnimationFrame(animate)
 }
 
 // Function to trigger the count animation
@@ -129,4 +137,12 @@ onMounted(() => {
 const formatNumber = (num: number): string => {
     return Math.round(num).toLocaleString()
 }
+
+// Cleanup animation frame on unmount to prevent memory leaks in iOS Safari/webviews
+onBeforeUnmount(() => {
+    if (animationFrameId.value !== null) {
+        cancelAnimationFrame(animationFrameId.value)
+        animationFrameId.value = null
+    }
+})
 </script>
